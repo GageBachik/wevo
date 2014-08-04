@@ -1,7 +1,17 @@
 {
-	"dependencies": {
-		"express": "^4",
-		"jade": "^1",
-		"body-parser": "^1"
-	}
+  "name": "wevo",
+  "version": "0.0.1",
+  "description": "A music discovery service built with youtube",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": "https://github.com/gbachik/wevo",
+  "author": "Gage Bachik (@gbachik, http://www.gagebachik.com)",
+  "dependencies": {
+    "body-parser": "^1",
+    "express": "^4",
+    "jade": "^1",
+    "q": "^1.0.1"
+  }
 }
