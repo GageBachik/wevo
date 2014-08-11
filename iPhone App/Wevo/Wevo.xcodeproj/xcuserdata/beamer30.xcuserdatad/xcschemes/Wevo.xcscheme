@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "72A9C1471997F42D0079209E"
+               BlueprintIdentifier = "815951AB17686C9E001D1556"
                BuildableName = "Wevo.app"
                BlueprintName = "Wevo"
                ReferencedContainer = "container:Wevo.xcodeproj">
@@ -28,21 +28,11 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "72A9C15C1997F42D0079209E"
-               BuildableName = "WevoTests.xctest"
-               BlueprintName = "WevoTests"
-               ReferencedContainer = "container:Wevo.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "72A9C1471997F42D0079209E"
+            BlueprintIdentifier = "815951AB17686C9E001D1556"
             BuildableName = "Wevo.app"
             BlueprintName = "Wevo"
             ReferencedContainer = "container:Wevo.xcodeproj">
@@ -61,7 +51,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "72A9C1471997F42D0079209E"
+            BlueprintIdentifier = "815951AB17686C9E001D1556"
             BuildableName = "Wevo.app"
             BlueprintName = "Wevo"
             ReferencedContainer = "container:Wevo.xcodeproj">
@@ -79,7 +69,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "72A9C1471997F42D0079209E"
+            BlueprintIdentifier = "815951AB17686C9E001D1556"
             BuildableName = "Wevo.app"
             BlueprintName = "Wevo"
             ReferencedContainer = "container:Wevo.xcodeproj">
@@ -91,6 +81,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "Wevo"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

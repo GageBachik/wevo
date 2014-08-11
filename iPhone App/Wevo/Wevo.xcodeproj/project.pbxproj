@@ -7,283 +7,461 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		72A9C14E1997F42D0079209E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A9C14D1997F42D0079209E /* AppDelegate.swift */; };
-		72A9C1511997F42D0079209E /* Wevo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 72A9C14F1997F42D0079209E /* Wevo.xcdatamodeld */; };
-		72A9C1561997F42D0079209E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72A9C1541997F42D0079209E /* Main.storyboard */; };
-		72A9C1581997F42D0079209E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72A9C1571997F42D0079209E /* Images.xcassets */; };
-		72A9C1641997F42D0079209E /* WevoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A9C1631997F42D0079209E /* WevoTests.swift */; };
-		72A9C16E1997F8AA0079209E /* croptest.gif in Resources */ = {isa = PBXBuildFile; fileRef = 72A9C16D1997F8AA0079209E /* croptest.gif */; };
-		72A9C171199800160079209E /* desert.gif in Resources */ = {isa = PBXBuildFile; fileRef = 72A9C16F199800160079209E /* desert.gif */; };
-		72A9C172199800160079209E /* ocean.gif in Resources */ = {isa = PBXBuildFile; fileRef = 72A9C170199800160079209E /* ocean.gif */; };
-		72A9C174199804F30079209E /* icean2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 72A9C173199804F30079209E /* icean2.gif */; };
-		72A9C17619984E3C0079209E /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A9C17519984E3C0079209E /* LoginController.swift */; };
+		7226736C1999449F0024DC38 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7226736B1999449F0024DC38 /* Alamofire.swift */; };
+		72F3589919992EDD00FCDE26 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F3589819992EDD00FCDE26 /* LoginPage.swift */; };
+		810A92A81772ACD700F55DFD /* TCWikipediaClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 810A92A71772ACD700F55DFD /* TCWikipediaClient.m */; };
+		810A92AC1772B0EE00F55DFD /* TCWikipediaImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 810A92AB1772B0ED00F55DFD /* TCWikipediaImage.m */; };
+		810A92B017730AD800F55DFD /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 810A92AE17730AD800F55DFD /* OpenSans-Light.ttf */; };
+		810A92B117730AD800F55DFD /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 810A92AF17730AD800F55DFD /* OpenSans-Regular.ttf */; };
+		811807C9176C114700A102B7 /* TCFreebaseDataType.m in Sources */ = {isa = PBXBuildFile; fileRef = 811807C8176C114700A102B7 /* TCFreebaseDataType.m */; };
+		8118B0B91769C50100ACE923 /* Topic_Template.html in Resources */ = {isa = PBXBuildFile; fileRef = 8118B0B81769C50100ACE923 /* Topic_Template.html */; };
+		812F06F71778341900111FAB /* BackButton-Landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 812F06F41778341900111FAB /* BackButton-Landscape@2x.png */; };
+		812F06F91778341900111FAB /* BackButton-Portrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 812F06F61778341900111FAB /* BackButton-Portrait@2x.png */; };
+		812F06FC1778351800111FAB /* BackButton-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 812F06FA1778351800111FAB /* BackButton-Landscape.png */; };
+		812F06FD1778351800111FAB /* BackButton-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 812F06FB1778351800111FAB /* BackButton-Portrait.png */; };
+		812F06FF177846A700111FAB /* Disclosure-Indicator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 812F06FE177846A700111FAB /* Disclosure-Indicator@2x.png */; };
+		812F07011778526200111FAB /* Disclosure-Indicator-Highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 812F07001778526200111FAB /* Disclosure-Indicator-Highlighted@2x.png */; };
+		812F070417785F2A00111FAB /* TCSearchSuggestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 812F070317785F2A00111FAB /* TCSearchSuggestionCell.m */; };
+		812F070A177862A900111FAB /* Disclosure-Indicator-Highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 812F0708177862A900111FAB /* Disclosure-Indicator-Highlighted.png */; };
+		812F070B177862A900111FAB /* Disclosure-Indicator.png in Resources */ = {isa = PBXBuildFile; fileRef = 812F0709177862A900111FAB /* Disclosure-Indicator.png */; };
+		813382FF17743291002CE68A /* TCWikipediaImageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 813382FE17743291002CE68A /* TCWikipediaImageService.m */; };
+		81354D7017718FEF001D8BC1 /* TCFreebaseSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 81354D6F17718FEF001D8BC1 /* TCFreebaseSearch.m */; };
+		813BE3451776D94800F6A177 /* SearchFieldBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 813BE3441776D94800F6A177 /* SearchFieldBackground.png */; };
+		81466F4D1775371800CEEE3F /* TCUIAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 81466F4C1775371800CEEE3F /* TCUIAppearance.m */; };
+		81466F5317753B7E00CEEE3F /* UIImage+UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 81466F5217753B7E00CEEE3F /* UIImage+UIColor.m */; };
+		81466F5B1775B19800CEEE3F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81466F561775B19800CEEE3F /* Default-568h@2x.png */; };
+		81466F5C1775B19800CEEE3F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 81466F571775B19800CEEE3F /* Default.png */; };
+		81466F5D1775B19800CEEE3F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81466F581775B19800CEEE3F /* Default@2x.png */; };
+		81466F5E1775B19800CEEE3F /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 81466F591775B19800CEEE3F /* Icon.png */; };
+		81466F5F1775B19800CEEE3F /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81466F5A1775B19800CEEE3F /* Icon@2x.png */; };
+		815951B017686C9E001D1556 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 815951AF17686C9E001D1556 /* UIKit.framework */; };
+		815951B217686C9E001D1556 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 815951B117686C9E001D1556 /* Foundation.framework */; };
+		815951B417686C9E001D1556 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 815951B317686C9E001D1556 /* CoreGraphics.framework */; };
+		815951BA17686C9E001D1556 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 815951B817686C9E001D1556 /* InfoPlist.strings */; };
+		815951BC17686C9E001D1556 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 815951BB17686C9E001D1556 /* main.m */; };
+		815951C017686C9E001D1556 /* TCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 815951BF17686C9E001D1556 /* TCAppDelegate.m */; };
+		815951C917686C9E001D1556 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 815951C717686C9E001D1556 /* MainStoryboard.storyboard */; };
+		815951CC17686C9E001D1556 /* TCMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815951CB17686C9E001D1556 /* TCMasterViewController.m */; };
+		815951CF17686C9E001D1556 /* TCDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815951CE17686C9E001D1556 /* TCDetailViewController.m */; };
+		815951D9176874A3001D1556 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 815951D8176874A3001D1556 /* SystemConfiguration.framework */; };
+		815951DB176874AA001D1556 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 815951DA176874AA001D1556 /* MobileCoreServices.framework */; };
+		815951DE17687574001D1556 /* TCFreebaseClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 815951DD17687574001D1556 /* TCFreebaseClient.m */; };
+		81FC96D1176DB9C000257C25 /* TCFreebaseTopic.m in Sources */ = {isa = PBXBuildFile; fileRef = 81FC96D0176DB9C000257C25 /* TCFreebaseTopic.m */; };
+		81FC96D4176DDA7900257C25 /* TCFreebaseProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 81FC96D3176DDA7900257C25 /* TCFreebaseProperty.m */; };
+		BC8F4081AEAB474FAF1A4C66 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 553C1255B70C4220A0479BEB /* libPods.a */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		72A9C15E1997F42D0079209E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 72A9C1401997F42D0079209E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 72A9C1471997F42D0079209E;
-			remoteInfo = Wevo;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		72A9C1481997F42D0079209E /* Wevo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wevo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		72A9C14C1997F42D0079209E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		72A9C14D1997F42D0079209E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		72A9C1501997F42D0079209E /* Wevo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Wevo.xcdatamodel; sourceTree = "<group>"; };
-		72A9C1551997F42D0079209E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		72A9C1571997F42D0079209E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		72A9C15D1997F42D0079209E /* WevoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WevoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		72A9C1621997F42D0079209E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		72A9C1631997F42D0079209E /* WevoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WevoTests.swift; sourceTree = "<group>"; };
-		72A9C16D1997F8AA0079209E /* croptest.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = croptest.gif; sourceTree = "<group>"; };
-		72A9C16F199800160079209E /* desert.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = desert.gif; sourceTree = "<group>"; };
-		72A9C170199800160079209E /* ocean.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ocean.gif; sourceTree = "<group>"; };
-		72A9C173199804F30079209E /* icean2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = icean2.gif; sourceTree = "<group>"; };
-		72A9C17519984E3C0079209E /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		16F72FFE9813463092AAA05B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		553C1255B70C4220A0479BEB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7226736B1999449F0024DC38 /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
+		72F3589719992EDD00FCDE26 /* TCKnowledgeGraph-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TCKnowledgeGraph-Bridging-Header.h"; sourceTree = "<group>"; };
+		72F3589819992EDD00FCDE26 /* LoginPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
+		810A92A61772ACD700F55DFD /* TCWikipediaClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCWikipediaClient.h; sourceTree = "<group>"; };
+		810A92A71772ACD700F55DFD /* TCWikipediaClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCWikipediaClient.m; sourceTree = "<group>"; };
+		810A92AA1772B0ED00F55DFD /* TCWikipediaImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCWikipediaImage.h; sourceTree = "<group>"; };
+		810A92AB1772B0ED00F55DFD /* TCWikipediaImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCWikipediaImage.m; sourceTree = "<group>"; };
+		810A92AE17730AD800F55DFD /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		810A92AF17730AD800F55DFD /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		811807C7176C114700A102B7 /* TCFreebaseDataType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCFreebaseDataType.h; sourceTree = "<group>"; };
+		811807C8176C114700A102B7 /* TCFreebaseDataType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCFreebaseDataType.m; sourceTree = "<group>"; };
+		8118B0B81769C50100ACE923 /* Topic_Template.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = Topic_Template.html; path = HTML/Topic_Template.html; sourceTree = "<group>"; };
+		812F06F41778341900111FAB /* BackButton-Landscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BackButton-Landscape@2x.png"; sourceTree = "<group>"; };
+		812F06F61778341900111FAB /* BackButton-Portrait@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BackButton-Portrait@2x.png"; sourceTree = "<group>"; };
+		812F06FA1778351800111FAB /* BackButton-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BackButton-Landscape.png"; sourceTree = "<group>"; };
+		812F06FB1778351800111FAB /* BackButton-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BackButton-Portrait.png"; sourceTree = "<group>"; };
+		812F06FE177846A700111FAB /* Disclosure-Indicator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Disclosure-Indicator@2x.png"; sourceTree = "<group>"; };
+		812F07001778526200111FAB /* Disclosure-Indicator-Highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Disclosure-Indicator-Highlighted@2x.png"; sourceTree = "<group>"; };
+		812F070217785F2A00111FAB /* TCSearchSuggestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCSearchSuggestionCell.h; sourceTree = "<group>"; };
+		812F070317785F2A00111FAB /* TCSearchSuggestionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCSearchSuggestionCell.m; sourceTree = "<group>"; };
+		812F0708177862A900111FAB /* Disclosure-Indicator-Highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Disclosure-Indicator-Highlighted.png"; sourceTree = "<group>"; };
+		812F0709177862A900111FAB /* Disclosure-Indicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Disclosure-Indicator.png"; sourceTree = "<group>"; };
+		813382FD17743291002CE68A /* TCWikipediaImageService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCWikipediaImageService.h; sourceTree = "<group>"; };
+		813382FE17743291002CE68A /* TCWikipediaImageService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCWikipediaImageService.m; sourceTree = "<group>"; };
+		81354D6E17718FEF001D8BC1 /* TCFreebaseSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCFreebaseSearch.h; sourceTree = "<group>"; };
+		81354D6F17718FEF001D8BC1 /* TCFreebaseSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCFreebaseSearch.m; sourceTree = "<group>"; };
+		813BE3441776D94800F6A177 /* SearchFieldBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SearchFieldBackground.png; sourceTree = "<group>"; };
+		81466F4B1775371800CEEE3F /* TCUIAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCUIAppearance.h; sourceTree = "<group>"; };
+		81466F4C1775371800CEEE3F /* TCUIAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCUIAppearance.m; sourceTree = "<group>"; };
+		81466F5117753B7E00CEEE3F /* UIImage+UIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UIColor.h"; sourceTree = "<group>"; };
+		81466F5217753B7E00CEEE3F /* UIImage+UIColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UIColor.m"; sourceTree = "<group>"; };
+		81466F561775B19800CEEE3F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		81466F571775B19800CEEE3F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		81466F581775B19800CEEE3F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		81466F591775B19800CEEE3F /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		81466F5A1775B19800CEEE3F /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		815951AC17686C9E001D1556 /* Wevo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wevo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		815951AF17686C9E001D1556 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		815951B117686C9E001D1556 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		815951B317686C9E001D1556 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		815951B717686C9E001D1556 /* Wevo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Wevo-Info.plist"; sourceTree = "<group>"; };
+		815951B917686C9E001D1556 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		815951BB17686C9E001D1556 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		815951BD17686C9E001D1556 /* Wevo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Wevo-Prefix.pch"; sourceTree = "<group>"; };
+		815951BE17686C9E001D1556 /* TCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCAppDelegate.h; sourceTree = "<group>"; };
+		815951BF17686C9E001D1556 /* TCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCAppDelegate.m; sourceTree = "<group>"; };
+		815951C817686C9E001D1556 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		815951CA17686C9E001D1556 /* TCMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCMasterViewController.h; sourceTree = "<group>"; };
+		815951CB17686C9E001D1556 /* TCMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCMasterViewController.m; sourceTree = "<group>"; };
+		815951CD17686C9E001D1556 /* TCDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCDetailViewController.h; sourceTree = "<group>"; };
+		815951CE17686C9E001D1556 /* TCDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCDetailViewController.m; sourceTree = "<group>"; };
+		815951D8176874A3001D1556 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		815951DA176874AA001D1556 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		815951DC17687574001D1556 /* TCFreebaseClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCFreebaseClient.h; sourceTree = "<group>"; };
+		815951DD17687574001D1556 /* TCFreebaseClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCFreebaseClient.m; sourceTree = "<group>"; };
+		81FC96CF176DB9C000257C25 /* TCFreebaseTopic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCFreebaseTopic.h; sourceTree = "<group>"; };
+		81FC96D0176DB9C000257C25 /* TCFreebaseTopic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCFreebaseTopic.m; sourceTree = "<group>"; };
+		81FC96D2176DDA7900257C25 /* TCFreebaseProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCFreebaseProperty.h; sourceTree = "<group>"; };
+		81FC96D3176DDA7900257C25 /* TCFreebaseProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCFreebaseProperty.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		72A9C1451997F42D0079209E /* Frameworks */ = {
+		815951A917686C9E001D1556 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		72A9C15A1997F42D0079209E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				815951DB176874AA001D1556 /* MobileCoreServices.framework in Frameworks */,
+				815951D9176874A3001D1556 /* SystemConfiguration.framework in Frameworks */,
+				815951B017686C9E001D1556 /* UIKit.framework in Frameworks */,
+				815951B217686C9E001D1556 /* Foundation.framework in Frameworks */,
+				815951B417686C9E001D1556 /* CoreGraphics.framework in Frameworks */,
+				BC8F4081AEAB474FAF1A4C66 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		72A9C13F1997F42D0079209E = {
+		72F3589619992EA400FCDE26 /* Wevo */ = {
 			isa = PBXGroup;
 			children = (
-				72A9C14A1997F42D0079209E /* Wevo */,
-				72A9C1601997F42D0079209E /* WevoTests */,
-				72A9C1491997F42D0079209E /* Products */,
+				7226736B1999449F0024DC38 /* Alamofire.swift */,
+				72F3589819992EDD00FCDE26 /* LoginPage.swift */,
+				72F3589719992EDD00FCDE26 /* TCKnowledgeGraph-Bridging-Header.h */,
+			);
+			name = Wevo;
+			sourceTree = "<group>";
+		};
+		810A92A91772AF8400F55DFD /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				815951DC17687574001D1556 /* TCFreebaseClient.h */,
+				815951DD17687574001D1556 /* TCFreebaseClient.m */,
+				810A92A61772ACD700F55DFD /* TCWikipediaClient.h */,
+				810A92A71772ACD700F55DFD /* TCWikipediaClient.m */,
+				813382FD17743291002CE68A /* TCWikipediaImageService.h */,
+				813382FE17743291002CE68A /* TCWikipediaImageService.m */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		810A92AD17730AD800F55DFD /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				810A92AE17730AD800F55DFD /* OpenSans-Light.ttf */,
+				810A92AF17730AD800F55DFD /* OpenSans-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		81466F551775B19800CEEE3F /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				812F0708177862A900111FAB /* Disclosure-Indicator-Highlighted.png */,
+				812F0709177862A900111FAB /* Disclosure-Indicator.png */,
+				812F07001778526200111FAB /* Disclosure-Indicator-Highlighted@2x.png */,
+				812F06FE177846A700111FAB /* Disclosure-Indicator@2x.png */,
+				812F06FA1778351800111FAB /* BackButton-Landscape.png */,
+				812F06FB1778351800111FAB /* BackButton-Portrait.png */,
+				812F06F41778341900111FAB /* BackButton-Landscape@2x.png */,
+				812F06F61778341900111FAB /* BackButton-Portrait@2x.png */,
+				813BE3441776D94800F6A177 /* SearchFieldBackground.png */,
+				81466F561775B19800CEEE3F /* Default-568h@2x.png */,
+				81466F571775B19800CEEE3F /* Default.png */,
+				81466F581775B19800CEEE3F /* Default@2x.png */,
+				81466F591775B19800CEEE3F /* Icon.png */,
+				81466F5A1775B19800CEEE3F /* Icon@2x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		815951A317686C9E001D1556 = {
+			isa = PBXGroup;
+			children = (
+				72F3589619992EA400FCDE26 /* Wevo */,
+				815951B517686C9E001D1556 /* TCKnowledgeGraph */,
+				815951AE17686C9E001D1556 /* Frameworks */,
+				815951AD17686C9E001D1556 /* Products */,
+				16F72FFE9813463092AAA05B /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
-		72A9C1491997F42D0079209E /* Products */ = {
+		815951AD17686C9E001D1556 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				72A9C1481997F42D0079209E /* Wevo.app */,
-				72A9C15D1997F42D0079209E /* WevoTests.xctest */,
+				815951AC17686C9E001D1556 /* Wevo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		72A9C14A1997F42D0079209E /* Wevo */ = {
+		815951AE17686C9E001D1556 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				72A9C14D1997F42D0079209E /* AppDelegate.swift */,
-				72A9C17519984E3C0079209E /* LoginController.swift */,
-				72A9C1541997F42D0079209E /* Main.storyboard */,
-				72A9C1571997F42D0079209E /* Images.xcassets */,
-				72A9C14F1997F42D0079209E /* Wevo.xcdatamodeld */,
-				72A9C14B1997F42D0079209E /* Supporting Files */,
+				815951DA176874AA001D1556 /* MobileCoreServices.framework */,
+				815951D8176874A3001D1556 /* SystemConfiguration.framework */,
+				815951AF17686C9E001D1556 /* UIKit.framework */,
+				815951B117686C9E001D1556 /* Foundation.framework */,
+				815951B317686C9E001D1556 /* CoreGraphics.framework */,
+				553C1255B70C4220A0479BEB /* libPods.a */,
 			);
-			path = Wevo;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		72A9C14B1997F42D0079209E /* Supporting Files */ = {
+		815951B517686C9E001D1556 /* TCKnowledgeGraph */ = {
 			isa = PBXGroup;
 			children = (
-				72A9C173199804F30079209E /* icean2.gif */,
-				72A9C16F199800160079209E /* desert.gif */,
-				72A9C170199800160079209E /* ocean.gif */,
-				72A9C16D1997F8AA0079209E /* croptest.gif */,
-				72A9C14C1997F42D0079209E /* Info.plist */,
+				815951BE17686C9E001D1556 /* TCAppDelegate.h */,
+				815951BF17686C9E001D1556 /* TCAppDelegate.m */,
+				810A92A91772AF8400F55DFD /* Services */,
+				815951D717686D98001D1556 /* Models */,
+				815951D617686CEC001D1556 /* Controllers */,
+				815951D517686CDD001D1556 /* Views */,
+				815951B617686C9E001D1556 /* Supporting Files */,
+			);
+			path = TCKnowledgeGraph;
+			sourceTree = "<group>";
+		};
+		815951B617686C9E001D1556 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				81466F551775B19800CEEE3F /* Images */,
+				810A92AD17730AD800F55DFD /* Fonts */,
+				815951B717686C9E001D1556 /* Wevo-Info.plist */,
+				815951B817686C9E001D1556 /* InfoPlist.strings */,
+				815951BB17686C9E001D1556 /* main.m */,
+				815951BD17686C9E001D1556 /* Wevo-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		72A9C1601997F42D0079209E /* WevoTests */ = {
+		815951D517686CDD001D1556 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				72A9C1631997F42D0079209E /* WevoTests.swift */,
-				72A9C1611997F42D0079209E /* Supporting Files */,
+				815951C717686C9E001D1556 /* MainStoryboard.storyboard */,
+				8118B0B81769C50100ACE923 /* Topic_Template.html */,
+				812F070217785F2A00111FAB /* TCSearchSuggestionCell.h */,
+				812F070317785F2A00111FAB /* TCSearchSuggestionCell.m */,
+				81466F4B1775371800CEEE3F /* TCUIAppearance.h */,
+				81466F4C1775371800CEEE3F /* TCUIAppearance.m */,
+				81466F5117753B7E00CEEE3F /* UIImage+UIColor.h */,
+				81466F5217753B7E00CEEE3F /* UIImage+UIColor.m */,
 			);
-			path = WevoTests;
+			name = Views;
 			sourceTree = "<group>";
 		};
-		72A9C1611997F42D0079209E /* Supporting Files */ = {
+		815951D617686CEC001D1556 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				72A9C1621997F42D0079209E /* Info.plist */,
+				815951CA17686C9E001D1556 /* TCMasterViewController.h */,
+				815951CB17686C9E001D1556 /* TCMasterViewController.m */,
+				815951CD17686C9E001D1556 /* TCDetailViewController.h */,
+				815951CE17686C9E001D1556 /* TCDetailViewController.m */,
 			);
-			name = "Supporting Files";
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		815951D717686D98001D1556 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				811807C8176C114700A102B7 /* TCFreebaseDataType.m */,
+				811807C7176C114700A102B7 /* TCFreebaseDataType.h */,
+				81354D6E17718FEF001D8BC1 /* TCFreebaseSearch.h */,
+				81354D6F17718FEF001D8BC1 /* TCFreebaseSearch.m */,
+				81FC96CF176DB9C000257C25 /* TCFreebaseTopic.h */,
+				81FC96D0176DB9C000257C25 /* TCFreebaseTopic.m */,
+				81FC96D2176DDA7900257C25 /* TCFreebaseProperty.h */,
+				81FC96D3176DDA7900257C25 /* TCFreebaseProperty.m */,
+				810A92AA1772B0ED00F55DFD /* TCWikipediaImage.h */,
+				810A92AB1772B0ED00F55DFD /* TCWikipediaImage.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		72A9C1471997F42D0079209E /* Wevo */ = {
+		815951AB17686C9E001D1556 /* Wevo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 72A9C1671997F42D0079209E /* Build configuration list for PBXNativeTarget "Wevo" */;
+			buildConfigurationList = 815951D217686C9E001D1556 /* Build configuration list for PBXNativeTarget "Wevo" */;
 			buildPhases = (
-				72A9C1441997F42D0079209E /* Sources */,
-				72A9C1451997F42D0079209E /* Frameworks */,
-				72A9C1461997F42D0079209E /* Resources */,
+				9A473DAA66EB44E087EA183F /* Check Pods Manifest.lock */,
+				815951A817686C9E001D1556 /* Sources */,
+				815951A917686C9E001D1556 /* Frameworks */,
+				815951AA17686C9E001D1556 /* Resources */,
+				77D1FD18C13340E091379BE5 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Wevo;
-			productName = Wevo;
-			productReference = 72A9C1481997F42D0079209E /* Wevo.app */;
+			productName = TCKnowledgeGraph;
+			productReference = 815951AC17686C9E001D1556 /* Wevo.app */;
 			productType = "com.apple.product-type.application";
-		};
-		72A9C15C1997F42D0079209E /* WevoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 72A9C16A1997F42D0079209E /* Build configuration list for PBXNativeTarget "WevoTests" */;
-			buildPhases = (
-				72A9C1591997F42D0079209E /* Sources */,
-				72A9C15A1997F42D0079209E /* Frameworks */,
-				72A9C15B1997F42D0079209E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				72A9C15F1997F42D0079209E /* PBXTargetDependency */,
-			);
-			name = WevoTests;
-			productName = WevoTests;
-			productReference = 72A9C15D1997F42D0079209E /* WevoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		72A9C1401997F42D0079209E /* Project object */ = {
+		815951A417686C9E001D1556 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
-				ORGANIZATIONNAME = "Gage Bachik";
+				CLASSPREFIX = TC;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Lee Tze Cheun";
 				TargetAttributes = {
-					72A9C1471997F42D0079209E = {
-						CreatedOnToolsVersion = 6.0;
+					815951AB17686C9E001D1556 = {
 						DevelopmentTeam = D569H5C3WV;
-					};
-					72A9C15C1997F42D0079209E = {
-						CreatedOnToolsVersion = 6.0;
-						TestTargetID = 72A9C1471997F42D0079209E;
 					};
 				};
 			};
-			buildConfigurationList = 72A9C1431997F42D0079209E /* Build configuration list for PBXProject "Wevo" */;
+			buildConfigurationList = 815951A717686C9E001D1556 /* Build configuration list for PBXProject "Wevo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 			);
-			mainGroup = 72A9C13F1997F42D0079209E;
-			productRefGroup = 72A9C1491997F42D0079209E /* Products */;
+			mainGroup = 815951A317686C9E001D1556;
+			productRefGroup = 815951AD17686C9E001D1556 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				72A9C1471997F42D0079209E /* Wevo */,
-				72A9C15C1997F42D0079209E /* WevoTests */,
+				815951AB17686C9E001D1556 /* Wevo */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		72A9C1461997F42D0079209E /* Resources */ = {
+		815951AA17686C9E001D1556 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72A9C174199804F30079209E /* icean2.gif in Resources */,
-				72A9C1561997F42D0079209E /* Main.storyboard in Resources */,
-				72A9C172199800160079209E /* ocean.gif in Resources */,
-				72A9C171199800160079209E /* desert.gif in Resources */,
-				72A9C16E1997F8AA0079209E /* croptest.gif in Resources */,
-				72A9C1581997F42D0079209E /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		72A9C15B1997F42D0079209E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				815951BA17686C9E001D1556 /* InfoPlist.strings in Resources */,
+				815951C917686C9E001D1556 /* MainStoryboard.storyboard in Resources */,
+				8118B0B91769C50100ACE923 /* Topic_Template.html in Resources */,
+				810A92B017730AD800F55DFD /* OpenSans-Light.ttf in Resources */,
+				810A92B117730AD800F55DFD /* OpenSans-Regular.ttf in Resources */,
+				81466F5B1775B19800CEEE3F /* Default-568h@2x.png in Resources */,
+				81466F5C1775B19800CEEE3F /* Default.png in Resources */,
+				81466F5D1775B19800CEEE3F /* Default@2x.png in Resources */,
+				81466F5E1775B19800CEEE3F /* Icon.png in Resources */,
+				81466F5F1775B19800CEEE3F /* Icon@2x.png in Resources */,
+				813BE3451776D94800F6A177 /* SearchFieldBackground.png in Resources */,
+				812F06F71778341900111FAB /* BackButton-Landscape@2x.png in Resources */,
+				812F06F91778341900111FAB /* BackButton-Portrait@2x.png in Resources */,
+				812F06FC1778351800111FAB /* BackButton-Landscape.png in Resources */,
+				812F06FD1778351800111FAB /* BackButton-Portrait.png in Resources */,
+				812F06FF177846A700111FAB /* Disclosure-Indicator@2x.png in Resources */,
+				812F07011778526200111FAB /* Disclosure-Indicator-Highlighted@2x.png in Resources */,
+				812F070A177862A900111FAB /* Disclosure-Indicator-Highlighted.png in Resources */,
+				812F070B177862A900111FAB /* Disclosure-Indicator.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXSourcesBuildPhase section */
-		72A9C1441997F42D0079209E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
+/* Begin PBXShellScriptBuildPhase section */
+		77D1FD18C13340E091379BE5 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72A9C17619984E3C0079209E /* LoginController.swift in Sources */,
-				72A9C1511997F42D0079209E /* Wevo.xcdatamodeld in Sources */,
-				72A9C14E1997F42D0079209E /* AppDelegate.swift in Sources */,
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
 		};
-		72A9C1591997F42D0079209E /* Sources */ = {
+		9A473DAA66EB44E087EA183F /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		815951A817686C9E001D1556 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72A9C1641997F42D0079209E /* WevoTests.swift in Sources */,
+				72F3589919992EDD00FCDE26 /* LoginPage.swift in Sources */,
+				815951BC17686C9E001D1556 /* main.m in Sources */,
+				815951C017686C9E001D1556 /* TCAppDelegate.m in Sources */,
+				815951CC17686C9E001D1556 /* TCMasterViewController.m in Sources */,
+				815951CF17686C9E001D1556 /* TCDetailViewController.m in Sources */,
+				815951DE17687574001D1556 /* TCFreebaseClient.m in Sources */,
+				811807C9176C114700A102B7 /* TCFreebaseDataType.m in Sources */,
+				81FC96D1176DB9C000257C25 /* TCFreebaseTopic.m in Sources */,
+				81FC96D4176DDA7900257C25 /* TCFreebaseProperty.m in Sources */,
+				81354D7017718FEF001D8BC1 /* TCFreebaseSearch.m in Sources */,
+				810A92A81772ACD700F55DFD /* TCWikipediaClient.m in Sources */,
+				810A92AC1772B0EE00F55DFD /* TCWikipediaImage.m in Sources */,
+				813382FF17743291002CE68A /* TCWikipediaImageService.m in Sources */,
+				81466F4D1775371800CEEE3F /* TCUIAppearance.m in Sources */,
+				7226736C1999449F0024DC38 /* Alamofire.swift in Sources */,
+				81466F5317753B7E00CEEE3F /* UIImage+UIColor.m in Sources */,
+				812F070417785F2A00111FAB /* TCSearchSuggestionCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		72A9C15F1997F42D0079209E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 72A9C1471997F42D0079209E /* Wevo */;
-			targetProxy = 72A9C15E1997F42D0079209E /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
-		72A9C1541997F42D0079209E /* Main.storyboard */ = {
+		815951B817686C9E001D1556 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				72A9C1551997F42D0079209E /* Base */,
+				815951B917686C9E001D1556 /* en */,
 			);
-			name = Main.storyboard;
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		815951C717686C9E001D1556 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				815951C817686C9E001D1556 /* en */,
+			);
+			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		72A9C1651997F42D0079209E /* Debug */ = {
+		815951D017686C9E001D1556 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -292,159 +470,101 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		72A9C1661997F42D0079209E /* Release */ = {
+		815951D117686C9E001D1556 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		72A9C1681997F42D0079209E /* Debug */ = {
+		815951D317686C9E001D1556 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 16F72FFE9813463092AAA05B /* Pods.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = Wevo/Info.plist;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TCKnowledgeGraph/Wevo-Prefix.pch";
+				INFOPLIST_FILE = "TCKnowledgeGraph/Wevo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Wevo;
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "TCKnowledgeGraph-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
-		72A9C1691997F42D0079209E /* Release */ = {
+		815951D417686C9E001D1556 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 16F72FFE9813463092AAA05B /* Pods.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = Wevo/Info.plist;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TCKnowledgeGraph/Wevo-Prefix.pch";
+				INFOPLIST_FILE = "TCKnowledgeGraph/Wevo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Wevo;
 				PROVISIONING_PROFILE = "";
-			};
-			name = Release;
-		};
-		72A9C16B1997F42D0079209E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Wevo.app/Wevo";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = WevoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-			};
-			name = Debug;
-		};
-		72A9C16C1997F42D0079209E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Wevo.app/Wevo";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = WevoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
+				SWIFT_OBJC_BRIDGING_HEADER = "TCKnowledgeGraph-Bridging-Header.h";
+				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		72A9C1431997F42D0079209E /* Build configuration list for PBXProject "Wevo" */ = {
+		815951A717686C9E001D1556 /* Build configuration list for PBXProject "Wevo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				72A9C1651997F42D0079209E /* Debug */,
-				72A9C1661997F42D0079209E /* Release */,
+				815951D017686C9E001D1556 /* Debug */,
+				815951D117686C9E001D1556 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		72A9C1671997F42D0079209E /* Build configuration list for PBXNativeTarget "Wevo" */ = {
+		815951D217686C9E001D1556 /* Build configuration list for PBXNativeTarget "Wevo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				72A9C1681997F42D0079209E /* Debug */,
-				72A9C1691997F42D0079209E /* Release */,
+				815951D317686C9E001D1556 /* Debug */,
+				815951D417686C9E001D1556 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-		};
-		72A9C16A1997F42D0079209E /* Build configuration list for PBXNativeTarget "WevoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				72A9C16B1997F42D0079209E /* Debug */,
-				72A9C16C1997F42D0079209E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		72A9C14F1997F42D0079209E /* Wevo.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				72A9C1501997F42D0079209E /* Wevo.xcdatamodel */,
-			);
-			currentVersion = 72A9C1501997F42D0079209E /* Wevo.xcdatamodel */;
-			path = Wevo.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
-	rootObject = 72A9C1401997F42D0079209E /* Project object */;
+	rootObject = 815951A417686C9E001D1556 /* Project object */;
 }
