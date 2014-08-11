@@ -9,13 +9,14 @@
 /* Begin PBXBuildFile section */
 		72A9C14E1997F42D0079209E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A9C14D1997F42D0079209E /* AppDelegate.swift */; };
 		72A9C1511997F42D0079209E /* Wevo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 72A9C14F1997F42D0079209E /* Wevo.xcdatamodeld */; };
-		72A9C1531997F42D0079209E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A9C1521997F42D0079209E /* ViewController.swift */; };
 		72A9C1561997F42D0079209E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72A9C1541997F42D0079209E /* Main.storyboard */; };
 		72A9C1581997F42D0079209E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72A9C1571997F42D0079209E /* Images.xcassets */; };
 		72A9C1641997F42D0079209E /* WevoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A9C1631997F42D0079209E /* WevoTests.swift */; };
 		72A9C16E1997F8AA0079209E /* croptest.gif in Resources */ = {isa = PBXBuildFile; fileRef = 72A9C16D1997F8AA0079209E /* croptest.gif */; };
 		72A9C171199800160079209E /* desert.gif in Resources */ = {isa = PBXBuildFile; fileRef = 72A9C16F199800160079209E /* desert.gif */; };
 		72A9C172199800160079209E /* ocean.gif in Resources */ = {isa = PBXBuildFile; fileRef = 72A9C170199800160079209E /* ocean.gif */; };
+		72A9C174199804F30079209E /* icean2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 72A9C173199804F30079209E /* icean2.gif */; };
+		72A9C17619984E3C0079209E /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A9C17519984E3C0079209E /* LoginController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,7 +34,6 @@
 		72A9C14C1997F42D0079209E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		72A9C14D1997F42D0079209E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72A9C1501997F42D0079209E /* Wevo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Wevo.xcdatamodel; sourceTree = "<group>"; };
-		72A9C1521997F42D0079209E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		72A9C1551997F42D0079209E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		72A9C1571997F42D0079209E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		72A9C15D1997F42D0079209E /* WevoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WevoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -42,6 +42,8 @@
 		72A9C16D1997F8AA0079209E /* croptest.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = croptest.gif; sourceTree = "<group>"; };
 		72A9C16F199800160079209E /* desert.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = desert.gif; sourceTree = "<group>"; };
 		72A9C170199800160079209E /* ocean.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ocean.gif; sourceTree = "<group>"; };
+		72A9C173199804F30079209E /* icean2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = icean2.gif; sourceTree = "<group>"; };
+		72A9C17519984E3C0079209E /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				72A9C14D1997F42D0079209E /* AppDelegate.swift */,
-				72A9C1521997F42D0079209E /* ViewController.swift */,
+				72A9C17519984E3C0079209E /* LoginController.swift */,
 				72A9C1541997F42D0079209E /* Main.storyboard */,
 				72A9C1571997F42D0079209E /* Images.xcassets */,
 				72A9C14F1997F42D0079209E /* Wevo.xcdatamodeld */,
@@ -96,6 +98,7 @@
 		72A9C14B1997F42D0079209E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				72A9C173199804F30079209E /* icean2.gif */,
 				72A9C16F199800160079209E /* desert.gif */,
 				72A9C170199800160079209E /* ocean.gif */,
 				72A9C16D1997F8AA0079209E /* croptest.gif */,
@@ -202,6 +205,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72A9C174199804F30079209E /* icean2.gif in Resources */,
 				72A9C1561997F42D0079209E /* Main.storyboard in Resources */,
 				72A9C172199800160079209E /* ocean.gif in Resources */,
 				72A9C171199800160079209E /* desert.gif in Resources */,
@@ -224,7 +228,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72A9C1531997F42D0079209E /* ViewController.swift in Sources */,
+				72A9C17619984E3C0079209E /* LoginController.swift in Sources */,
 				72A9C1511997F42D0079209E /* Wevo.xcdatamodeld in Sources */,
 				72A9C14E1997F42D0079209E /* AppDelegate.swift in Sources */,
 			);
