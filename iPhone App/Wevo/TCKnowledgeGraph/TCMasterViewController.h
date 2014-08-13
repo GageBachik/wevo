@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TCMasterViewController : UITableViewController
-    <UISearchBarDelegate>
+@interface TCMasterViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
 @end

@@ -18,6 +18,7 @@
         _topicID = [attributes[@"mid"] copy];
         _topicName = [attributes[@"name"] copy];
         _notableName = [attributes[@"notable"][@"name"] copy];
+        _artistName = attributes[@"output"][@"contributor"][@"/music/recording/artist"][0][@"name"];
     }
     return self;
 }
@@ -59,10 +60,11 @@
     
     // Parameters for the Freebase Search API.
     NSDictionary *parameters = @{@"query": query,
-                                 @"limit": @10,
+                                 @"limit": @15,
                                  @"prefixed": @"true",
                                  @"type": @"/common/topic",
-                                 @"filter":@"(any type:/music/single type:/music/musical_group)"};
+                                 @"filter":@"(any type:/music/musical_group type:/music/recording)",
+                                 @"output":@"(contributor)"};
     NSURLRequest *request = [freebaseClient requestWithMethod:@"GET" path:@"search" parameters:parameters];
     
     // Create the search operation and add it to the queue.
@@ -89,8 +91,13 @@ NSArray* searchResultsFromJSONObject(NSDictionary *JSONObject)
     
     for (NSDictionary *resultObject in resultsArray) {
         TCFreebaseSearchResult *searchResult = [[TCFreebaseSearchResult alloc] initWithAttributes:resultObject];
-        [searchResults addObject:searchResult];
+        BOOL alreadyThere = [searchResults containsObject: searchResult];
+        if (!alreadyThere) {
+            [searchResults addObject:searchResult];
+        }
     }
+    
+    //NSLog(@"Search result: %@", resultsArray);
     
     return [searchResults copy];
 }

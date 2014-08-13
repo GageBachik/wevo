@@ -17,8 +17,8 @@
     self.detailTextLabel.font = [UIFont fontWithName:@"OpenSans-Light" size:14.0];
     
     // Custom Accessory View
-    self.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Disclosure-Indicator"]
-                                           highlightedImage:[UIImage imageNamed:@"Disclosure-Indicator-Highlighted"]];
+//    self.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Disclosure-Indicator"]
+//                                           highlightedImage:[UIImage imageNamed:@"Disclosure-Indicator-Highlighted"]];
 }
 
 @end

@@ -7,14 +7,12 @@
 //
 
 #import "TCAppDelegate.h"
-#import "TCUIAppearance.h"
 
 @implementation TCAppDelegate
 
 // Override point for customization after application launch.
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [TCUIAppearance styleApp];
     return YES;
 }
 							

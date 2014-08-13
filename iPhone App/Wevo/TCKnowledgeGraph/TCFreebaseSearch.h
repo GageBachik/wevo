@@ -13,6 +13,7 @@
 @property (nonatomic, copy, readonly) NSString *topicID;
 @property (nonatomic, copy, readonly) NSString *topicName;
 @property (nonatomic, copy, readonly) NSString *notableName;
+@property (nonatomic, copy, readonly) NSString *artistName;
 @end
 
 //TODO: Separate TCFreebaseSearchService to another class and place it under Services group?

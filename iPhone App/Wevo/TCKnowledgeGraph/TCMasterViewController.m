@@ -7,28 +7,41 @@
 //
 
 #import "TCMasterViewController.h"
-#import "TCDetailViewController.h"
 #import "TCFreebaseSearch.h"
-#import "TCFreebaseTopic.h"
+#import "MBProgressHUD.h"
+#import "Wevo-Swift.h"
 
 @interface TCMasterViewController ()
 
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, strong) NSArray *searchResults;
+@property (nonatomic, strong) NSMutableArray *artistList;
 
 @end
 
 @implementation TCMasterViewController
+
 
 #pragma mark - View Controller Life Cycle
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    
+    self.artistList = [[NSMutableArray alloc] init];
     
     // Set focus to the UISearchBar, so that user can start
     // entering their query right away.
+    
     [self.searchBar becomeFirstResponder];
+}
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self.view endEditing:YES];
+}
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -84,6 +97,12 @@
                 
 }
 
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+    
+}
+
 #pragma mark - Table View Data Source and Delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -106,24 +125,103 @@
                                                             forIndexPath:indexPath];
         
     TCFreebaseSearchResult *searchResult = self.searchResults[indexPath.row];
-    cell.textLabel.text = searchResult.topicName;
-    cell.detailTextLabel.text = searchResult.notableName;    
+    
+    //NSLog(@"artist name: %@", searchResult.artistName);
+    if (searchResult.artistName) {
+        cell.textLabel.text = searchResult.topicName;
+        cell.detailTextLabel.text = searchResult.artistName;
+    }else{
+        cell.textLabel.text = searchResult.topicName;
+        cell.detailTextLabel.text = searchResult.notableName;
+    }
+    
+    NSString *selectedTrack = [NSString stringWithFormat: @"%@ - %@ ", searchResult.artistName, searchResult.topicName];
+    BOOL alreadySelectedTrack = [self.artistList containsObject: selectedTrack];
+    BOOL alreadySelected = [self.artistList containsObject: searchResult.topicName];
+    if (!alreadySelected && !alreadySelectedTrack){
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }else{
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
     return cell;
 }
 
-
-#pragma mark - Storyboard Navigation
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        TCFreebaseSearchResult *searchResult = self.searchResults[indexPath.row];
-        
-        TCDetailViewController *detailViewController = (TCDetailViewController *)[segue destinationViewController];
-        detailViewController.topic = [[TCFreebaseTopic alloc] initWithID:searchResult.topicID
-                                                                    name:searchResult.topicName];
+    TCFreebaseSearchResult *searchResult = self.searchResults[indexPath.row];
+    // NSLog(@"%@", searchResult.topicName);
+    
+    if (searchResult.artistName) {
+        NSString *selectedTrack = [NSString stringWithFormat: @"%@ - %@ ", searchResult.artistName, searchResult.topicName];
+        BOOL alreadySelectedTrack = [self.artistList containsObject: selectedTrack];
+        if (!alreadySelectedTrack) {
+            [self.artistList addObject: selectedTrack];
+            UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            NSLog(@"%@", self.artistList);
+        }else {
+            [self.artistList removeObjectAtIndex:[self.artistList indexOfObject:searchResult.artistName]];
+            UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            NSLog(@"%@", self.artistList);
+        }
+    }else {
+        BOOL alreadySelecteArtist = [self.artistList containsObject: searchResult.topicName];
+        if (!alreadySelecteArtist){
+            [self.artistList addObject:[NSString stringWithFormat: @"%@", searchResult.topicName]];
+            UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            NSLog(@"%@", self.artistList);
+        }else {
+            [self.artistList removeObjectAtIndex:[self.artistList indexOfObject:searchResult.topicName]];
+            UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            NSLog(@"%@", self.artistList);
+        }
     }
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
+#pragma mark - Logout or Play
+- (IBAction)didLogout:(id)sender {
+    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    [self performSegueWithIdentifier:@"didLogout" sender:nil];
+}
+- (IBAction)didPlay:(id)sender {
+    
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        // Do something...
+        
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        NSString *token = [prefs stringForKey:@"token"];
+        
+        Play * ply = [[Play alloc] init];
+        [ply postToServer:self.artistList userId: token];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [self performSegueWithIdentifier:@"startPlaylist" sender:self];
+        });
+    });
+
+}
+
+//#pragma mark - Storyboard Navigation
+//
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    if ([[segue identifier] isEqualToString:@"showDetail"]) {
+//        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+//        TCFreebaseSearchResult *searchResult = self.searchResults[indexPath.row];
+//        
+//        TCDetailViewController *detailViewController = (TCDetailViewController *)[segue destinationViewController];
+//        detailViewController.topic = [[TCFreebaseTopic alloc] initWithID:searchResult.topicID name:searchResult.topicName];
+//    }
+//}
 
 @end
