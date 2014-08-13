@@ -3,7 +3,7 @@ var User = require('../models/users.js');
 
 var userController = {
 	auth: function(req, res) {
-		console.log(req.body);
+		// console.log(req.body);
 		User.findOneOrCreate({username: req.body.username, password: req.body.password}, {
 			username: req.body.username, 
 			password: req.body.password

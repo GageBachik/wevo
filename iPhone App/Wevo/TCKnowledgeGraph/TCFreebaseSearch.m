@@ -15,7 +15,7 @@
 {
     self = [super init];
     if (self) {
-        _topicID = [attributes[@"mid"] copy];
+        //_topicID = [attributes[@"mid"] copy];
         _topicName = [attributes[@"name"] copy];
         _notableName = [attributes[@"notable"][@"name"] copy];
         _artistName = attributes[@"output"][@"contributor"][@"/music/recording/artist"][0][@"name"];
@@ -91,10 +91,21 @@ NSArray* searchResultsFromJSONObject(NSDictionary *JSONObject)
     
     for (NSDictionary *resultObject in resultsArray) {
         TCFreebaseSearchResult *searchResult = [[TCFreebaseSearchResult alloc] initWithAttributes:resultObject];
-        BOOL alreadyThere = [searchResults containsObject: searchResult];
+        BOOL alreadyThere = NO;
+        for (TCFreebaseSearchResult *result in searchResults){
+            //NSLog(@"result.topicName: %@ - searchResult.topicname: %@",result.topicName, searchResult.topicName);
+            if (result.artistName == searchResult.artistName && result.notableName == searchResult.notableName) {
+                NSLog(@"there was a match!");
+                alreadyThere = YES;
+            }
+        }
         if (!alreadyThere) {
+            //NSLog(@"Search results: %p - search result: %p", searchResults, searchResult);
             [searchResults addObject:searchResult];
         }
+//        else{
+//            NSLog(@"Was already there");
+//        }
     }
     
     //NSLog(@"Search result: %@", resultsArray);

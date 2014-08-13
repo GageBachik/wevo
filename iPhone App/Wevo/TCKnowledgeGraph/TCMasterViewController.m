@@ -137,8 +137,9 @@
     
     NSString *selectedTrack = [NSString stringWithFormat: @"%@ - %@ ", searchResult.artistName, searchResult.topicName];
     BOOL alreadySelectedTrack = [self.artistList containsObject: selectedTrack];
-    BOOL alreadySelected = [self.artistList containsObject: searchResult.topicName];
-    if (!alreadySelected && !alreadySelectedTrack){
+    NSString *selectedArtist = [NSString stringWithFormat: @"%@ - %@ ", searchResult.topicName, searchResult.notableName];
+    BOOL alreadySelecteArtist = [self.artistList containsObject: selectedArtist];
+    if (!alreadySelecteArtist && !alreadySelectedTrack){
         cell.accessoryType = UITableViewCellAccessoryNone;
     }else{
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -160,20 +161,21 @@
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
             NSLog(@"%@", self.artistList);
         }else {
-            [self.artistList removeObjectAtIndex:[self.artistList indexOfObject:searchResult.artistName]];
+            [self.artistList removeObjectAtIndex:[self.artistList indexOfObject: selectedTrack]];
             UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
             cell.accessoryType = UITableViewCellAccessoryNone;
             NSLog(@"%@", self.artistList);
         }
     }else {
-        BOOL alreadySelecteArtist = [self.artistList containsObject: searchResult.topicName];
+        NSString *selectedArtist = [NSString stringWithFormat: @"%@ - %@ ", searchResult.topicName, searchResult.notableName];
+        BOOL alreadySelecteArtist = [self.artistList containsObject: selectedArtist];
         if (!alreadySelecteArtist){
-            [self.artistList addObject:[NSString stringWithFormat: @"%@", searchResult.topicName]];
+            [self.artistList addObject: selectedArtist];
             UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
             NSLog(@"%@", self.artistList);
         }else {
-            [self.artistList removeObjectAtIndex:[self.artistList indexOfObject:searchResult.topicName]];
+            [self.artistList removeObjectAtIndex:[self.artistList indexOfObject: selectedArtist]];
             UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
             cell.accessoryType = UITableViewCellAccessoryNone;
             NSLog(@"%@", self.artistList);

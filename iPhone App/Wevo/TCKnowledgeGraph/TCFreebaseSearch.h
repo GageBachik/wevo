@@ -10,7 +10,7 @@
  Encapsulates the Freebase search results JSON response.
  */
 @interface TCFreebaseSearchResult : NSObject
-@property (nonatomic, copy, readonly) NSString *topicID;
+//@property (nonatomic, copy, readonly) NSString *topicID;
 @property (nonatomic, copy, readonly) NSString *topicName;
 @property (nonatomic, copy, readonly) NSString *notableName;
 @property (nonatomic, copy, readonly) NSString *artistName;
