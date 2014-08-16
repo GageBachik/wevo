@@ -29,7 +29,7 @@
 {
     [super viewDidAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
-    
+    [self.tableView reloadData];
     self.artistList = [[NSMutableArray alloc] init];
     
     // Set focus to the UISearchBar, so that user can start
@@ -154,6 +154,10 @@
     
     if (searchResult.artistName) {
         NSString *selectedTrack = [NSString stringWithFormat: @"%@ - %@ ", searchResult.artistName, searchResult.topicName];
+        NSString *and = @"&";
+        if ([selectedTrack rangeOfString:and].location != NSNotFound) {
+            selectedTrack = [selectedTrack stringByReplacingOccurrencesOfString:and withString:@"and"];
+        }
         BOOL alreadySelectedTrack = [self.artistList containsObject: selectedTrack];
         if (!alreadySelectedTrack) {
             [self.artistList addObject: selectedTrack];
@@ -168,6 +172,10 @@
         }
     }else {
         NSString *selectedArtist = [NSString stringWithFormat: @"%@ - %@ ", searchResult.topicName, searchResult.notableName];
+        NSString *and = @"&";
+        if ([selectedArtist rangeOfString:and].location != NSNotFound) {
+            selectedArtist = [selectedArtist stringByReplacingOccurrencesOfString:and withString:@"and"];
+        }
         BOOL alreadySelecteArtist = [self.artistList containsObject: selectedArtist];
         if (!alreadySelecteArtist){
             [self.artistList addObject: selectedArtist];
@@ -193,23 +201,24 @@
 }
 - (IBAction)didPlay:(id)sender {
     
-    
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        // Do something...
-        
-        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-        NSString *token = [prefs stringForKey:@"token"];
-        
-        Play * ply = [[Play alloc] init];
-        [ply postToServer:self.artistList userId: token];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
+    if ([self.artistList count] > 0) {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            // Do something...
             
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-            [self performSegueWithIdentifier:@"startPlaylist" sender:self];
+            NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+            NSString *token = [prefs stringForKey:@"token"];
+            NSLog(@"artistlist - %@", self.artistList);
+            Play * ply = [[Play alloc] init];
+            [ply postToServer:self.artistList userId: token];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self performSegueWithIdentifier:@"startPlaylist" sender:self];
+            });
         });
-    });
+    }
 
 }
 

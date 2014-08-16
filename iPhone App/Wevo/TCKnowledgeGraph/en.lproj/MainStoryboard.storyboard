@@ -315,10 +315,19 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="BbK-LN-ZxY" appends="YES" id="OxK-XO-wBI"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="8tN-qs-vb3"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oj7-PB-7k4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="BbK-LN-ZxY">
+                    <connections>
+                        <action selector="newMusicSearch:" destination="LPe-6b-R1a" id="i70-yy-LtQ"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="909" y="-597"/>
         </scene>

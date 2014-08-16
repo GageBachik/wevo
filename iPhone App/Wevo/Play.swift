@@ -12,7 +12,7 @@ import Foundation
     
     @objc func postToServer(artists: NSArray, userId: NSString) {
         
-        var postData = ["artists": artists]
+        var postData = ["artists": artists];
         println("the post data is: \(postData)");
         println("the userId is: \(userId)");
         var postUrl = "http://192.168.1.120:1337/music/" + userId

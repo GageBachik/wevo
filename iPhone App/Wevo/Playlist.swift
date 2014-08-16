@@ -12,7 +12,9 @@ class Playlist: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let cSelector : Selector = "newMusicSearch:"
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: cSelector)
+        rightSwipe.direction = UISwipeGestureRecognizerDirection.Right
         // Do any additional setup after loading the view.
     }
     
@@ -26,6 +28,10 @@ class Playlist: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+
+    @IBAction func newMusicSearch(sender: AnyObject) {
+        self.navigationController.popViewControllerAnimated(true);
+    }
 
     /*
     // MARK: - Navigation
