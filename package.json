@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "A music discovery service built with youtube",
   "main": "app.js",
+  "web": "node app.js",
   "scripts": {
     "test": "node app.js"
   },
