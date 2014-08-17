@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "description": "A music discovery service built with youtube",
   "main": "app.js",
-  "web": "node app.js",
   "scripts": {
     "test": "node app.js"
   },
@@ -13,6 +12,7 @@
     "bluebird": "^2.3.0",
     "body-parser": "^1",
     "express": "^4",
+    "fetch": "^0.3.6",
     "jade": "^1",
     "mongoose": "^3.8.14",
     "mongoose-find-one-or-create": "^0.2.0",
