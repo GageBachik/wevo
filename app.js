@@ -11,15 +11,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended: false}));
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://gbachik:freedom347@ds055689.mongolab.com:55689/wevo');
-
-//reverse engineered pandoras related artists
-// var request = require('request');
-// request('http://www.pandora.com/json/music/artist/all-time-low?explicit=false', function (error, response, body) {
-//   if (!error && response.statusCode == 200) {
-//     console.log(body) // Print the google web page.
-//   }
-// })
+mongoose.connect('mongodb://gbachik:freedom347@kahana.mongohq.com:10004/wevo');
 
 app.get('/', indexController.index);
 
@@ -30,6 +22,10 @@ app.post('/auth', userController.auth);
 //start music search
 
 app.post('/music/:userId', musicController.search);
+
+//getNextTen VideoIds
+
+app.post('/user/getNextTen', userController.getNextTen);
 
 var port = process.env.PORT || 1337;
 var server = app.listen(port, function() {

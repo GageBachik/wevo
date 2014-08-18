@@ -4,3 +4,5 @@
 
 #import "TCMasterViewController.h"
 #import "MBProgressHUD.h"
+#import "XCDYouTubeKit.h"
+#import "MPMoviePlayerController+BackgroundPlayback.h"

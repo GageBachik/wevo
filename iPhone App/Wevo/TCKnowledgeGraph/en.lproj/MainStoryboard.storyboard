@@ -307,33 +307,77 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Implement videos" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UW4-At-gYT">
-                                <rect key="frame" x="87" y="125" width="136" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rLb-Dh-vnd" userLabel="customControls">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="knv-kE-O7T" userLabel="BottomAvControls">
+                                        <rect key="frame" x="0.0" y="476" width="320" height="92"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.16078431369999999" green="0.18039215689999999" blue="0.1960784314" alpha="0.0" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" alpha="0.74999999999999978" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gnA-lX-uda">
+                                        <rect key="frame" x="227" y="501" width="70" height="42"/>
+                                        <state key="normal" image="forward 2.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="didPressNext:" destination="LPe-6b-R1a" eventType="touchUpInside" id="Orr-7c-l8b"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" alpha="0.74999999999999978" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pgg-ad-itu">
+                                        <rect key="frame" x="24" y="501" width="70" height="42"/>
+                                        <state key="normal" image="rewind 2.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="didPressPrevious:" destination="LPe-6b-R1a" eventType="touchUpInside" id="aHu-Ow-0FG"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" alpha="0.74999999999999978" contentMode="scaleToFill" fixedFrame="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XeZ-Gb-iBB">
+                                        <rect key="frame" x="130" y="492" width="60" height="60"/>
+                                        <color key="tintColor" red="0.21176470589999999" green="0.47450980390000003" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="pause 2.png">
+                                            <color key="titleShadowColor" red="0.21176470589999999" green="0.47450980390000003" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="didPressPausePlay:" destination="LPe-6b-R1a" eventType="touchUpInside" id="ufn-er-38E"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="BbK-LN-ZxY" appends="YES" id="OxK-XO-wBI"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="8tN-qs-vb3"/>
+                    <connections>
+                        <outlet property="customControls" destination="rLb-Dh-vnd" id="vve-jZ-sJ7"/>
+                        <outlet property="pauseplayButton" destination="XeZ-Gb-iBB" id="DTU-yA-f5q"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Oj7-PB-7k4" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <swipeGestureRecognizer direction="right" id="BbK-LN-ZxY">
                     <connections>
                         <action selector="newMusicSearch:" destination="LPe-6b-R1a" id="i70-yy-LtQ"/>
                     </connections>
                 </swipeGestureRecognizer>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Oj7-PB-7k4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="909" y="-597"/>
+            <point key="canvasLocation" x="946" y="-588"/>
         </scene>
     </scenes>
     <resources>
+        <image name="forward 2.png" width="100" height="60"/>
         <image name="menu.png" width="78" height="71"/>
+        <image name="pause 2.png" width="60" height="60"/>
+        <image name="rewind 2.png" width="100" height="60"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

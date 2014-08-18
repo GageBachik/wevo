@@ -11,8 +11,10 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+    #import <AVFoundation/AVFoundation.h>
     #import <SystemConfiguration/SystemConfiguration.h>
     #import <MobileCoreServices/MobileCoreServices.h>
-
+    #import "XCDYouTubeKit.h"
+    #import "MPMoviePlayerController+BackgroundPlayback.h"
     #import "AFNetworking.h"
 #endif

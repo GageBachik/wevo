@@ -29,6 +29,9 @@
 {
     [super viewDidAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
+    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
+    [self setNeedsStatusBarAppearanceUpdate];
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
     [self.tableView reloadData];
     self.artistList = [[NSMutableArray alloc] init];
     
@@ -193,6 +196,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
+
 #pragma mark - Logout or Play
 - (IBAction)didLogout:(id)sender {
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
@@ -200,39 +207,14 @@
     [self performSegueWithIdentifier:@"didLogout" sender:nil];
 }
 - (IBAction)didPlay:(id)sender {
-    
+    [self.view endEditing:YES];
     if ([self.artistList count] > 0) {
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            // Do something...
-            
-            NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-            NSString *token = [prefs stringForKey:@"token"];
-            NSLog(@"artistlist - %@", self.artistList);
-            Play * ply = [[Play alloc] init];
-            [ply postToServer:self.artistList userId: token];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
-                [self performSegueWithIdentifier:@"startPlaylist" sender:self];
-            });
-        });
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        NSString *token = [prefs stringForKey:@"token"];
+        NSLog(@"artistlist - %@", self.artistList);
+        Play * ply = [[Play alloc] init];
+        [ply postToServer:self.artistList userId:token context:self];
     }
 
 }
-
-//#pragma mark - Storyboard Navigation
-//
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    if ([[segue identifier] isEqualToString:@"showDetail"]) {
-//        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-//        TCFreebaseSearchResult *searchResult = self.searchResults[indexPath.row];
-//        
-//        TCDetailViewController *detailViewController = (TCDetailViewController *)[segue destinationViewController];
-//        detailViewController.topic = [[TCFreebaseTopic alloc] initWithID:searchResult.topicID name:searchResult.topicName];
-//    }
-//}
-
 @end

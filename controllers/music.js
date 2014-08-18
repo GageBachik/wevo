@@ -1,12 +1,14 @@
 //initial required libraries
 var Promise = require("bluebird");
 var request = Promise.promisifyAll(require('request'));
+var User = require('../models/users.js');
 var toTitleCase = function(str) {
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 };
 
-function MusicSearch(artists, userId) {
+function MusicSearch(artists, userId, res) {
 	//ranked artists and tracks
+	this.res = res;
 	this.relatedFinished = 0;
 	this.artists = artists;
 	this.userId = userId;
@@ -15,6 +17,7 @@ function MusicSearch(artists, userId) {
 	this.initialArtists = [];
 	this.intitialTracks = {/*Artist: [track names]*/};
 	this.finalTrackList = [/*Track Name*/];
+	this.videoIds = [/*Firt 10 video ids when everything is done*/];
 }
 
 MusicSearch.prototype.parseItems = function() {
@@ -357,14 +360,34 @@ MusicSearch.prototype.makeFinalTrackList = function() {
 	setTracks();
 	// console.log("topTracks:", this.topTracks);
 	// console.log("finalTrackList:", this.finalTrackList, this.finalTrackList.length);
-	this.getYoutubeIds();
+	this.getFirstTenYoutubeIds();
 }
 
-MusicSearch.prototype.getYoutubeIds = function() {
-	console.log('getting youtube ids:');
+MusicSearch.prototype.getFirstTenYoutubeIds = function() {
+	console.log('getFirstTenYoutubeIds:');
 	var self = this;
-	request.getAsync('https://www.googleapis.com/youtube/v3/search?part=id&q=all+time+low&key=AIzaSyDaHcw5b3PPbw60RPsscYnT0qKeRfesn0s').then(function(results){
-		console.log("results:", results[0].body);
+	var firstTen = this.finalTrackList.splice(0,10);
+	var youtubeIdCalls = [];
+	// update user
+	var query = {"_id": this.userId};
+	var update = {currentPlaylist: this.finalTrackList};
+	var options = {new: true};
+	User.findOneAndUpdate(query, update, options, function(err, user) {
+	  if (err) {
+	    console.log('got an error');
+	  }
+
+	  // console.log("user:", user);
+	});
+	//end updating user
+	firstTen.map(function(trackName){
+		youtubeIdCalls.push(request.getAsync('https://www.googleapis.com/youtube/v3/search?part=id&maxResults=1&q='+trackName+'&type=video&videoEmbeddable=true&key=AIzaSyDcL_3c23SfRPdgIAaRcz-rSDmb62S1yDA').spread(function(res, body){return JSON.parse(body).items[0].id.videoId;}));
+	});
+
+	Promise.all(youtubeIdCalls).then(function(videoIds){
+		console.log("videoIds:", videoIds);
+		self.res.send({videoIds: videoIds});
+
 	});
 }
 
@@ -374,10 +397,9 @@ var musicController = {
 		var artists = req.body["artists[]"];
 		console.log("req.body:", req.body);
 		console.log("Posted to musicSearch with userId:" + userId, "and artists list: " + artists);
-		var currentSearch = new MusicSearch(artists, userId);
+		var currentSearch = new MusicSearch(artists, userId, res);
 		currentSearch.parseItems();
 		currentSearch.findRelatedArtists();
-		res.send({lol: 'it worked'});
 	}
 };
 

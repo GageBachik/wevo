@@ -7,12 +7,22 @@
 //
 
 #import "TCAppDelegate.h"
+#import "PlayerEventLogger.h"
 
 @implementation TCAppDelegate
+
+@synthesize window = _window;
 
 // Override point for customization after application launch.
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"PlayVideoInBackground"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoPlayerViewControllerDidReceiveVideo:) name:XCDYouTubeVideoPlayerViewControllerDidReceiveVideoNotification object:nil];
+    
+    [[PlayerEventLogger sharedLogger] setEnabled:YES];
     return YES;
 }
 							
@@ -41,6 +51,26 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - Notifications
+
+- (void) videoPlayerViewControllerDidReceiveVideo:(NSNotification *)notification
+{
+    XCDYouTubeVideo *video = notification.userInfo[XCDYouTubeVideoUserInfoKey];
+    NSString *title = video.title;
+    if (title)
+        [MPNowPlayingInfoCenter defaultCenter].nowPlayingInfo = @{ MPMediaItemPropertyTitle: title };
+    
+    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:video.mediumThumbnailURL] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        if (data)
+        {
+            UIImage *image = [UIImage imageWithData:data];
+            MPMediaItemArtwork *artwork = [[MPMediaItemArtwork alloc] initWithImage:image];
+            if (title && artwork)
+                [MPNowPlayingInfoCenter defaultCenter].nowPlayingInfo = @{ MPMediaItemPropertyTitle: title, MPMediaItemPropertyArtwork: artwork };
+        }
+    }];
 }
 
 @end

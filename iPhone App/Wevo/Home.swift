@@ -17,7 +17,9 @@ class Home: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
+        UINavigationBar.appearance().barStyle = UIBarStyle.Black
+        self.navigationController.navigationBar.barStyle = UIBarStyle.Default;
+        self.setNeedsStatusBarAppearanceUpdate()
         usernameTextField.delegate = self
         passwordTextField.delegate = self
         
@@ -55,7 +57,7 @@ class Home: UIViewController, UITextFieldDelegate {
     
     @IBAction func didSignIn(sender: AnyObject) {
 
-        Alamofire.request(.POST, "http://192.168.1.120:1337/auth", parameters: ["username": usernameTextField.text, "password": passwordTextField.text])
+        Alamofire.request(.POST, "http://192.168.1.122:1337/auth", parameters: ["username": usernameTextField.text, "password": passwordTextField.text])
             .responseJSON {(request, response, JSON, error) in
                 println(error)
                 println(JSON)
@@ -77,7 +79,7 @@ class Home: UIViewController, UITextFieldDelegate {
     
     @IBAction func didSignUp(sender: AnyObject) {
         
-        Alamofire.request(.POST, "http://192.168.1.120:1337/auth", parameters: ["username": usernameTextField.text, "password": passwordTextField.text])
+        Alamofire.request(.POST, "http://192.168.1.122:1337/auth", parameters: ["username": usernameTextField.text, "password": passwordTextField.text])
             .responseJSON {(request, response, JSON, error) in
                 println(error)
                 println(JSON)
@@ -95,6 +97,10 @@ class Home: UIViewController, UITextFieldDelegate {
                     self.performSegueWithIdentifier("goToFreebase", sender: self)
                 }
         }
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+            return UIStatusBarStyle.LightContent;
     }
 
     /*

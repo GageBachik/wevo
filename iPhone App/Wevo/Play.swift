@@ -10,19 +10,23 @@ import Foundation
 
 @objc class Play : UIViewController {
     
-    @objc func postToServer(artists: NSArray, userId: NSString) {
+    @objc func postToServer(artists: NSArray, userId: NSString, context: UIViewController) {
+        var hud = MBProgressHUD.showHUDAddedTo(context.view, animated: true)
+        hud.labelText = "Forging User Experience"
         
         var postData = ["artists": artists];
         println("the post data is: \(postData)");
         println("the userId is: \(userId)");
-        var postUrl = "http://192.168.1.120:1337/music/" + userId
+        var postUrl = "http://192.168.1.122:1337/music/" + userId
         Alamofire.request(.POST, postUrl, parameters: postData)
             .responseJSON {(request, response, JSON, error) in
-                println(error)
-                println(JSON)
-//                var parsed = JSON as NSDictionary
-//                println(parsed)
-//                self.performSegueWithIdentifier("startPlaylist", sender: self)
+                println("Error: \(error)")
+//                println(JSON)
+                var parsed = JSON as NSDictionary
+                NSUserDefaults.standardUserDefaults().setObject(parsed["videoIds"], forKey:"videoIds")
+                NSUserDefaults.standardUserDefaults().synchronize()
+                MBProgressHUD.hideHUDForView(context.view, animated: true);
+                context.performSegueWithIdentifier("startPlaylist", sender: context)
         }
     }
 }
