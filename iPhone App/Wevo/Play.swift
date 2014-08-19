@@ -24,6 +24,7 @@ import Foundation
 //                println(JSON)
                 var parsed = JSON as NSDictionary
                 NSUserDefaults.standardUserDefaults().setObject(parsed["videoIds"], forKey:"videoIds")
+                NSUserDefaults.standardUserDefaults().setObject(parsed["count"], forKey:"count")
                 NSUserDefaults.standardUserDefaults().synchronize()
                 MBProgressHUD.hideHUDForView(context.view, animated: true);
                 context.performSegueWithIdentifier("startPlaylist", sender: context)

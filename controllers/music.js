@@ -44,7 +44,7 @@ MusicSearch.prototype.parseItems = function() {
 			self.initialArtists.push(artist);
 			self.rankedArtists[artist] = 1;
 		}
-		if (trackOrType.search('Artist') === -1) {
+		if (trackOrType.search('Artist') === -1 && trackOrType.search('Group') === -1) {
 			self.intitialTracks[artist] = trackOrType;
 		}
 		//console.log("count:", count);
@@ -79,10 +79,12 @@ MusicSearch.prototype.googleRelated = function() {
 			var alts = body.toString().split('alt\\x3d\\x22');
 			alts.forEach(function (alt) { var cur = alt.split("\\x22")[0]; if (cur.indexOf("(")==-1)    ret.push(cur) });
 			ret.map(function(artist){
-				if (toTitleCase(artist) in self.rankedArtists) {
-					self.rankedArtists[toTitleCase(artist)] += 1;
+				var parsed = artist.split('+').join('');
+				parsed = parsed.split('\\x26amp;').join('&');
+				if (toTitleCase(parsed) in self.rankedArtists) {
+					self.rankedArtists[toTitleCase(parsed)] += 1;
 				}else{
-					self.rankedArtists[toTitleCase(artist)] = 0;
+					self.rankedArtists[toTitleCase(parsed)] = 0;
 				}
 			});
 			count++
@@ -110,16 +112,20 @@ MusicSearch.prototype.pandoraRelated = function() {
 	});
 	Promise.all(relatedArtisetCalls).spread(function() {
 		[].map.call(arguments, function(res){
-			// console.log("res:", res);
 			var results = JSON.parse(res[0].body);
-			var similar = results.artistExplorer.similar;
-			similar.map(function(artist){
-				if (toTitleCase(artist['@name']) in self.rankedArtists) {
-					self.rankedArtists[toTitleCase(artist['@name'])] += 1;
-				}else{
-					self.rankedArtists[toTitleCase(artist['@name'])] = 0;
-				}
-			});
+			if (Object.keys(results).length !== 0) {
+				var similar = results.artistExplorer.similar;
+				similar.map(function(artist){
+					var parsed = artist['@name'].split('+').join('');
+					if (toTitleCase(parsed) in self.rankedArtists) {
+						self.rankedArtists[toTitleCase(parsed)] += 1;
+					}else{
+						self.rankedArtists[toTitleCase(parsed)] = 0;
+					}
+				});
+			}else{
+				console.log('Artist not found on pandora');
+			}
 			console.log("rankedArtists pandoraDone:", self.rankedArtists);
 			self.relatedFinished++;
 			if (self.relatedFinished === 4) {
@@ -137,28 +143,30 @@ MusicSearch.prototype.spotifyRelated = function() {
 	this.initialArtists.map(function(artist, index){
 		var nameFixed = artist.split('&').join('and');
 		nameFixed = nameFixed.split(' ').join('-');
-		var spotUrl = 'https://api.spotify.com/v1/search';
-		var appendString = '?type=artist&q=' + nameFixed;
+
+		var spotUrl = 'https://ws.spotify.com/search/1/';
+		var appendString = 'artist.json?q=' + nameFixed;
 		var fixedUrl = spotUrl + appendString;
-		artistIdCalls.push(request.getAsync(fixedUrl));
+		artistIdCalls.push(request.getAsync(fixedUrl).spread(function(res){
+			var parsed = JSON.parse(res.body);
+			return parsed.artists[0].href.split('spotify:artist:').join('');
+		}));
 	});
 	Promise.all(artistIdCalls).then(function(results){
 		var relatedArtisetCalls = [];
-		results.map(function(result){
-			var artistObj = JSON.parse(result[0].body);
-			relatedArtisetCalls.push(request.getAsync('https://api.spotify.com/v1/artists/' + artistObj.artists.items[0].id + '/related-artists'));
+		results.map(function(artist){
+			relatedArtisetCalls.push(request.getAsync('https://api.spotify.com/v1/artists/' + artist + '/related-artists'));
 		});
 		Promise.all(relatedArtisetCalls).then(function(results){
 			results.map(function(result){
 				var relatedArtists = JSON.parse(result[0].body);
 				// console.log("relatedArtists:", relatedArtists);
 				relatedArtists.artists.map(function(artist){
-					// console.log(artist.name);
-					//why dont these have quotes
-					if (toTitleCase(artist.name) in self.rankedArtists) {
-						self.rankedArtists[toTitleCase(artist.name)] += 1;
+					var parsed = artist.name.split('+').join('');
+					if (toTitleCase(parsed) in self.rankedArtists) {
+						self.rankedArtists[toTitleCase(parsed)] += 1;
 					}else{
-						self.rankedArtists[toTitleCase(artist.name)] = 0;
+						self.rankedArtists[toTitleCase(parsed)] = 0;
 					}
 				});
 			});
@@ -180,10 +188,11 @@ MusicSearch.prototype.lastfmRelated = function() {
 	Promise.all(relatedArtisetCalls).then(function(results){
 		var related = JSON.parse(results[0][0].body);
 		related.similarartists.artist.map(function(artist){
-			if (toTitleCase(artist.name) in self.rankedArtists) {
-				self.rankedArtists[toTitleCase(artist.name)] += 1;
+			var parsed = artist.name.split('+').join('');
+			if (toTitleCase(parsed) in self.rankedArtists) {
+				self.rankedArtists[toTitleCase(parsed)] += 1;
 			}else{
-				self.rankedArtists[toTitleCase(artist.name)] = 0;
+				self.rankedArtists[toTitleCase(parsed)] = 0;
 			}
 		});
 		console.log("rankedArtists lastfmDone:", self.rankedArtists);
@@ -220,31 +229,57 @@ MusicSearch.prototype.getTopTracks = function() {
 	var lastfmCalls = [];
 	var spotifyCalls = [];
 	var spotifyGetTopCalls = [];
+	var needsAmpersand = [];
 	for (artist in this.rankedArtists){
+		if (artist.indexOf('&') !== -1) {
+			artist = artist.split('&').join('And');
+			needsAmpersand.push(artist);
+		}
 		lastfmCalls.push(request.getAsync('http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist='+artist+'&api_key=048054556397dbbc3d4263b613e573f7&format=json&limit=5').spread(function(res, body){return body;}));
-		spotifyCalls.push(request.getAsync('https://api.spotify.com/v1/search?type=artist&q='+artist).spread(function(res){return res.body;}));
+		spotifyCalls.push(request.getAsync('https://ws.spotify.com/search/1/artist.json?q='+artist).spread(function(res){
+			if (res.body) {
+				var parsed = JSON.parse(res.body);
+				if (parsed.artists.length < 1) {
+					return 'No Artist Found';
+				}else{
+					return parsed.artists[0].href.split('spotify:artist:').join('');
+				}
+			}
+		}));
 	}
 
 	Promise.all(spotifyCalls).then(function(results){
-		results.map(function(result){
-			var parsed = JSON.parse(result);
-			spotifyGetTopCalls.push(request.getAsync('https://api.spotify.com/v1/artists/'+parsed.artists.items[0].id+'/top-tracks?country=US').spread(function(res){return res.body;}));
+		results.map(function(artist){
+			if (artist !== 'No Artist Found') {	
+				spotifyGetTopCalls.push(request.getAsync('https://api.spotify.com/v1/artists/'+artist+'/top-tracks?country=US').spread(function(res){return res.body;}));
+			}
 		});
 
 		Promise.all(spotifyGetTopCalls).then(function(results){
 			results.map(function(result){
 				var parsed = JSON.parse(result);
-				parsed.tracks.map(function(track, index){
-					if (index < 6) {
-						if (toTitleCase(track.artists[0].name) in self.topTracks) {
-							if (self.topTracks[toTitleCase(track.artists[0].name)].indexOf(toTitleCase(track.name)) === -1) {
-								self.topTracks[toTitleCase(track.artists[0].name)].push(toTitleCase(track.name));
+				if (parsed.tracks) {
+					if (parsed.tracks.length > 1) {
+						parsed.tracks.map(function(track, index){
+							track.artists[0].name = track.artists[0].name.split('+').join('');
+							track.artists[0].name = track.artists[0].name.split('-').join(' ');
+							if (needsAmpersand.indexOf(toTitleCase(track.artists[0].name)) !== -1) {
+								track.artists[0].name = toTitleCase(track.artists[0].name).split('And').join('&');
 							}
-						}else{
-							self.topTracks[toTitleCase(track.artists[0].name)] = [toTitleCase(track.name)];
-						}
+							if (index < 6) {
+								if (toTitleCase(track.artists[0].name) in self.topTracks) {
+									if (self.topTracks[toTitleCase(track.artists[0].name)].indexOf(toTitleCase(track.name)) === -1) {
+										self.topTracks[toTitleCase(track.artists[0].name)].push(toTitleCase(track.name));
+									}
+								}else{
+									self.topTracks[toTitleCase(track.artists[0].name)] = [toTitleCase(track.name)];
+								}
+							}
+						});
+					}else{
+						console.log("Spotify found no top tracks for an artist");
 					}
-				});
+				}
 			});
 			count++;
 			if (count === 2) {
@@ -257,16 +292,39 @@ MusicSearch.prototype.getTopTracks = function() {
 	Promise.all(lastfmCalls).then(function(body){
 		body.map(function(result){
 			var parsed = JSON.parse(result);
-			parsed.toptracks.track.map(function(track){
-				// console.log("track:", track);
-				if (toTitleCase(track.artist.name) in self.topTracks) {
-					if (self.topTracks[toTitleCase(track.artist.name)].indexOf(toTitleCase(track.name)) === -1) {
-						self.topTracks[toTitleCase(track.artist.name)].push(toTitleCase(track.name));
-					}
+			if (parsed.toptracks !== undefined && 'track' in parsed.toptracks) {
+				if (parsed.toptracks.track instanceof Array) {
+					parsed.toptracks.track.map(function(track){
+						track.artist.name = track.artist.name.split('+').join('');
+						track.artist.name = track.artist.name.split('-').join(' ');
+						if (needsAmpersand.indexOf(toTitleCase(track.artist.name)) !== -1) {
+							track.artist.name = toTitleCase(track.artist.name).split('And').join('&');
+						}
+						if (toTitleCase(track.artist.name) in self.topTracks) {
+							if (self.topTracks[toTitleCase(track.artist.name)].indexOf(toTitleCase(track.name)) === -1) {
+								self.topTracks[toTitleCase(track.artist.name)].push(toTitleCase(track.name));
+							}
+						}else{
+							self.topTracks[toTitleCase(track.artist.name)] = [toTitleCase(track.name)];
+						}
+					});
 				}else{
-					self.topTracks[toTitleCase(track.artist.name)] = [toTitleCase(track.name)];
+					parsed.toptracks.track.artist.name = parsed.toptracks.track.artist.name.split('+').join('');
+					parsed.toptracks.track.artist.name = parsed.toptracks.track.artist.name.split('-').join(' ');
+					if (needsAmpersand.indexOf(toTitleCase(parsed.toptracks.track.artist.name)) !== -1) {
+						track.artist.name = toTitleCase(parsed.toptracks.track.artist.name).split('And').join('&');
+					}
+					if (toTitleCase(parsed.toptracks.track.artist.name) in self.topTracks) {
+						if (self.topTracks[toTitleCase(parsed.toptracks.track.artist.name)].indexOf(toTitleCase(parsed.toptracks.track.name)) === -1) {
+							self.topTracks[toTitleCase(parsed.toptracks.track.artist.name)].push(toTitleCase(parsed.toptracks.track.name));
+						}
+					}else{
+						self.topTracks[toTitleCase(parsed.toptracks.track.artist.name)] = [toTitleCase(parsed.toptracks.track.name)];
+					}
 				}
-			});
+			}else{
+				console.log("lastfm found no top tracks for an artist");
+			}
 		});
 		count++;
 		if (count === 2) {
@@ -311,6 +369,9 @@ MusicSearch.prototype.makeFinalTrackList = function() {
 		}else{
 			var randomArtistIndex = Math.floor((Math.random() * self.initialArtists.length));
 			var artist = self.initialArtists.splice(randomArtistIndex, 1);
+			artist[0] = artist[0].split('-').join(' ');
+			artist[0] = artist[0].split('+').join('');
+			artist[0] = toTitleCase(artist[0]);
 			var randomTrackIndex = Math.floor((Math.random() * self.topTracks[artist].length));
 			self.finalTrackList.push(artist +' - '+ self.topTracks[artist].splice(randomTrackIndex, 1));
 			previousArtist = artist;
@@ -329,7 +390,7 @@ MusicSearch.prototype.makeFinalTrackList = function() {
 			var selection = Math.random() * 100;
 			var rangedArtists = {};
 			for (artist in self.rankedArtists){
-				if (artist !== previousArtist){
+				if (artist !== previousArtist && artist in self.topTracks){
 					rangedArtists[artist] = self.rankedArtists[artist];
 				}
 			}
@@ -342,6 +403,8 @@ MusicSearch.prototype.makeFinalTrackList = function() {
 			for (artist in rangedArtists){
 				current += rangedArtists[artist];
 				if((previous < selection) && (selection < current)){
+					// console.log("broken self.topTracks:", self.topTracks);
+					// console.log("broken artist:", artist);
 					var randomTrackIndex = Math.floor((Math.random() * self.topTracks[artist].length));
 					self.finalTrackList.push(artist +' - '+ self.topTracks[artist].splice(randomTrackIndex, 1));
 					previousArtist = artist;
@@ -352,6 +415,7 @@ MusicSearch.prototype.makeFinalTrackList = function() {
 				previous += rangedArtists[artist];
 			}
 		}
+		console.log("self.topTracks:", self.topTracks);
 	};
 
 	getTotalTracks();
@@ -381,12 +445,22 @@ MusicSearch.prototype.getFirstTenYoutubeIds = function() {
 	});
 	//end updating user
 	firstTen.map(function(trackName){
-		youtubeIdCalls.push(request.getAsync('https://www.googleapis.com/youtube/v3/search?part=id&maxResults=1&q='+trackName+'&type=video&videoEmbeddable=true&key=AIzaSyDcL_3c23SfRPdgIAaRcz-rSDmb62S1yDA').spread(function(res, body){return JSON.parse(body).items[0].id.videoId;}));
+		// console.log("firt ten trackName:", trackName);
+		trackName = trackName.split(' ').join('+');
+		youtubeIdCalls.push(request.getAsync('https://www.googleapis.com/youtube/v3/search?part=id&maxResults=1&q='+trackName+'&type=video&videoEmbeddable=true&key=AIzaSyDcL_3c23SfRPdgIAaRcz-rSDmb62S1yDA').spread(function(res, body){
+			if (JSON.parse(body).items.length > 0) {
+				return JSON.parse(body).items[0].id.videoId;
+			}
+		}));
 	});
 
 	Promise.all(youtubeIdCalls).then(function(videoIds){
+		var videoIds = videoIds.filter(function(videoId){
+			return videoId !== undefined;
+		});
+		var count = videoIds.length -1;
 		console.log("videoIds:", videoIds);
-		self.res.send({videoIds: videoIds});
+		self.res.send({videoIds: videoIds, count: count});
 
 	});
 }

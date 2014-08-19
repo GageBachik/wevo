@@ -8,7 +8,9 @@
 
 import UIKit
 
+var firstPlay: Bool = true;
 var videoIds: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("videoIds")
+var count: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("count");
 var currentIndex = 0;
 var currentImage = 0;
 var playImage = UIImage(named: "Play.png")
@@ -35,19 +37,40 @@ class Playlist: UIViewController {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "videoEnded:", name: MPMoviePlayerPlaybackDidFinishNotification, object: nil)
         
-//         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoPlayerViewControllerDidReceiveVideo:) name:XCDYouTubeVideoPlayerViewControllerDidReceiveVideoNotification object:nil];
-        
         //end
-        videoPlayerViewController.moviePlayer.backgroundPlaybackEnabled = true;
-        videoPlayerViewController.presentInView(self.view);
-        videoPlayerViewController.moviePlayer.controlStyle = MPMovieControlStyle.None
-        self.view.bringSubviewToFront(customControls);
-        videoPlayerViewController.moviePlayer.play()
+//        videoPlayerViewController.moviePlayer.backgroundPlaybackEnabled = true;
+//        videoPlayerViewController.presentInView(self.view);
+//        videoPlayerViewController.moviePlayer.controlStyle = MPMovieControlStyle.None
+//        self.view.bringSubviewToFront(customControls);
+//        videoPlayerViewController.moviePlayer.play()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController.setNavigationBarHidden(true, animated: false)
+        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.None);
+        if (!firstPlay){
+            currentIndex = 0;
+            currentImage = 0;
+            videoIds = NSUserDefaults.standardUserDefaults().objectForKey("videoIds")
+            count = NSUserDefaults.standardUserDefaults().objectForKey("count");
+            parsedVideoIds = videoIds as NSArray;
+            currentVideo = parsedVideoIds[currentIndex] as NSString
+            videoPlayerViewController = XCDYouTubeVideoPlayerViewController(videoIdentifier: currentVideo);
+        }else{
+            firstPlay = false;
+        }
+        videoPlayerViewController.moviePlayer.backgroundPlaybackEnabled = true;
+        videoPlayerViewController.presentInView(self.view);
+        videoPlayerViewController.moviePlayer.controlStyle = MPMovieControlStyle.None
+        self.view.bringSubviewToFront(customControls);
+        videoPlayerViewController.moviePlayer.play()
+        currentImage = 0
+        pauseplayButton.setImage(pauseImage, forState: UIControlState.Normal)
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true;
     }
 
     override func didReceiveMemoryWarning() {
@@ -75,7 +98,7 @@ class Playlist: UIViewController {
     }
 
     @IBAction func didPressNext(sender: AnyObject) {
-        if (currentIndex < 9){
+        if (currentIndex < count as NSInteger){
             currentIndex++
             println("current index \(currentIndex)")
             currentVideo = parsedVideoIds[currentIndex] as NSString
@@ -95,8 +118,8 @@ class Playlist: UIViewController {
             Alamofire.request(.POST, postUrl, parameters: postData)
                 .responseJSON {(request, response, JSON, error) in
                     println("Error: \(error)")
-                    //                println(JSON)
                     var parsed = JSON as NSDictionary
+                    count = parsed["count"] as NSInteger
                     parsedVideoIds = parsed["videoIds"] as NSArray
                     currentVideo = parsedVideoIds[currentIndex] as NSString
                     videoPlayerViewController = XCDYouTubeVideoPlayerViewController(videoIdentifier: currentVideo);

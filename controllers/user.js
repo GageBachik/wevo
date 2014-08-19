@@ -22,12 +22,21 @@ var userController = {
 
 		var sendNextTenIds = function(trackList){
 			trackList.map(function(trackName){
-				youtubeIdCalls.push(request.getAsync('https://www.googleapis.com/youtube/v3/search?part=id&maxResults=1&q='+trackName+'&type=video&videoEmbeddable=true&key=AIzaSyDcL_3c23SfRPdgIAaRcz-rSDmb62S1yDA').spread(function(res, body){return JSON.parse(body).items[0].id.videoId;}));
+				trackName = trackName.split(' ').join('+');
+				youtubeIdCalls.push(request.getAsync('https://www.googleapis.com/youtube/v3/search?part=id&maxResults=1&q='+trackName+'&type=video&videoEmbeddable=true&key=AIzaSyDcL_3c23SfRPdgIAaRcz-rSDmb62S1yDA').spread(function(res, body){
+					if (JSON.parse(body).items.length > 0) {
+						return JSON.parse(body).items[0].id.videoId;
+					}
+				}));
 			});
 
 			Promise.all(youtubeIdCalls).then(function(videoIds){
+				var videoIds = videoIds.filter(function(videoId){
+					return videoId !== undefined;
+				});
+				var count = videoIds.length -1;
 				console.log("videoIds:", videoIds);
-				res.send({videoIds: videoIds});
+				res.send({videoIds: videoIds, count: count});
 
 			});
 		}
