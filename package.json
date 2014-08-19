@@ -5,7 +5,8 @@
   "main": "app.js",
   "web": "node app.js",
   "scripts": {
-    "test": "node app.js"
+    "test": "node app.js",
+    "start": "node app.js"
   },
   "repository": "https://github.com/gbachik/wevo",
   "author": "Gage Bachik (@gbachik, http://www.gagebachik.com)",
