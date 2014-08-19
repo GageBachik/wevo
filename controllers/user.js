@@ -24,8 +24,11 @@ var userController = {
 			trackList.map(function(trackName){
 				trackName = trackName.split(' ').join('+');
 				youtubeIdCalls.push(request.getAsync('https://www.googleapis.com/youtube/v3/search?part=id&maxResults=1&q='+trackName+'&type=video&videoEmbeddable=true&key=AIzaSyDcL_3c23SfRPdgIAaRcz-rSDmb62S1yDA').spread(function(res, body){
-					if (JSON.parse(body).items.length > 0) {
-						return JSON.parse(body).items[0].id.videoId;
+					var body = JSON.parse(body);
+					if ('items' in body) {
+						if (body.items.length > 0) {
+							return JSON.parse(body).items[0].id.videoId;
+						}
 					}
 				}));
 			});
