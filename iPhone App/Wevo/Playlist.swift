@@ -114,7 +114,7 @@ class Playlist: UIViewController {
             currentIndex = 0
             println("hit 11 currint index:\(currentIndex)")
             var postData = ["userId": token];
-            var postUrl = "http://192.168.1.122:1337/user/getNextTen"
+            var postUrl = "http://107.170.6.117:49154/user/getNextTen"
             Alamofire.request(.POST, postUrl, parameters: postData)
                 .responseJSON {(request, response, JSON, error) in
                     println("Error: \(error)")
