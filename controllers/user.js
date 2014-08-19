@@ -27,7 +27,7 @@ var userController = {
 					var body = JSON.parse(body);
 					if ('items' in body) {
 						if (body.items.length > 0) {
-							return JSON.parse(body).items[0].id.videoId;
+							return body.items[0].id.videoId;
 						}
 					}
 				}));
