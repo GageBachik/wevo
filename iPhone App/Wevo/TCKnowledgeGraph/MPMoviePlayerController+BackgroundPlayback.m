@@ -57,7 +57,8 @@ static __weak MPMoviePlayerController *currentMoviePlayerController;
 
 + (void) backgroundPlayback_moviePlayerPlaybackDidFinish:(NSNotification *)notification
 {
-	currentMoviePlayerController = nil;
+//	currentMoviePlayerController = nil;
+    currentMoviePlayerController = notification.object;
 }
 
 __attribute__((overloadable))

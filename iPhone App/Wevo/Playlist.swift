@@ -18,9 +18,13 @@ var pauseImage = UIImage(named: "pause 2.png")
 var parsedVideoIds = videoIds as NSArray;
 var currentVideo = parsedVideoIds[currentIndex] as NSString
 var videoPlayerViewController: XCDYouTubeVideoPlayerViewController = XCDYouTubeVideoPlayerViewController(videoIdentifier: currentVideo);
+var videoString: NSString = ""
+var fixedString: String = ""
+var finalTitle: String = ""
 
 class Playlist: UIViewController {
     
+    @IBOutlet var videoTitle: UILabel!
     @IBOutlet var pauseplayButton: UIButton!
     @IBOutlet var customControls: UIView!
     var token: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey("token")
@@ -33,9 +37,16 @@ class Playlist: UIViewController {
         rightSwipe.direction = UISwipeGestureRecognizerDirection.Right
         // Do any additional setup after loading the view.
         
+        UIApplication.sharedApplication().beginReceivingRemoteControlEvents()
+        self.becomeFirstResponder();
+        
         //notify me when video has ended
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "videoEnded:", name: MPMoviePlayerPlaybackDidFinishNotification, object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "videoCanPlay:", name: MPMoviePlayerLoadStateDidChangeNotification, object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "videoPlayerViewControllerDidReceiveVideo:", name: XCDYouTubeVideoPlayerViewControllerDidReceiveVideoNotification, object: nil)
         
         //end
 //        videoPlayerViewController.moviePlayer.backgroundPlaybackEnabled = true;
@@ -67,6 +78,23 @@ class Playlist: UIViewController {
         videoPlayerViewController.moviePlayer.play()
         currentImage = 0
         pauseplayButton.setImage(pauseImage, forState: UIControlState.Normal)
+    }
+    //remote events
+    
+    override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+    
+    override func remoteControlReceivedWithEvent(event: UIEvent!) {
+        if  (event.type == UIEventType.RemoteControl){
+            if (event.subtype.toRaw() == 100 || event.subtype.toRaw() == 101){
+                didPressPausePlay(self)
+            }else if(event.subtype.toRaw() == 104){
+                didPressNext(self)
+            }else if(event.subtype.toRaw() == 105){
+                didPressPrevious(self)
+            }
+        }
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -114,7 +142,7 @@ class Playlist: UIViewController {
             currentIndex = 0
             println("hit 11 currint index:\(currentIndex)")
             var postData = ["userId": token];
-            var postUrl = "http://107.170.6.117:49156/user/getNextTen"
+            var postUrl = "http://107.170.6.117:49157/user/getNextTen"
             Alamofire.request(.POST, postUrl, parameters: postData)
                 .responseJSON {(request, response, JSON, error) in
                     println("Error: \(error)")
@@ -137,6 +165,7 @@ class Playlist: UIViewController {
     }
 
     @IBAction func didPressPrevious(sender: AnyObject) {
+        videoTitle.text = ""
         if (currentIndex != 0){
             currentIndex--
             currentVideo = parsedVideoIds[currentIndex] as NSString
@@ -153,6 +182,14 @@ class Playlist: UIViewController {
     
     //Notification recieved
     
+    func videoPlayerViewControllerDidReceiveVideo(notification: NSNotification){
+        videoString = notification.userInfo.description as NSString
+        fixedString = videoString.substringFromIndex(22) as String
+        finalTitle = fixedString.stringByReplacingOccurrencesOfString("]", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        videoTitle.text = finalTitle
+        videoPlayerViewController.moviePlayer.play()
+    }
+
     func videoEnded(notification: NSNotification){
 
         let userInfo = notification.userInfo as [String:NSNumber]
@@ -162,8 +199,29 @@ class Playlist: UIViewController {
             didPressNext(self);
         }
     }
-
-
+    
+    func videoCanPlay(notification: NSNotification){
+        var moviePlayerController = notification.object
+         as MPMoviePlayerController
+        var loadState: NSMutableString
+        var state = moviePlayerController.loadState as MPMovieLoadState
+        if (state & MPMovieLoadState.PlaythroughOK){
+            println("Video Playable!")
+            dispatch_after(1, dispatch_get_main_queue(), {videoPlayerViewController.moviePlayer.play()})
+        }
+    }
+    
+    //landscape orientation
+    
+    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        var currentOrientation = self.interfaceOrientation
+        if (currentOrientation.isLandscape){
+            videoTitle.text = ""
+        }else{
+            videoTitle.text = finalTitle
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

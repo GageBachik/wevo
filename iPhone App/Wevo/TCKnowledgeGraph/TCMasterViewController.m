@@ -152,6 +152,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self.view endEditing:YES];
     TCFreebaseSearchResult *searchResult = self.searchResults[indexPath.row];
     // NSLog(@"%@", searchResult.topicName);
     
@@ -195,9 +196,13 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-
+// device setup
 -(UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;
+}
+
+- (NSUInteger) supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 #pragma mark - Logout or Play

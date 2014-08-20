@@ -19,7 +19,8 @@
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"PlayVideoInBackground"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
-    
+    [[AVAudioSession sharedInstance] setActive: YES error: nil];
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoPlayerViewControllerDidReceiveVideo:) name:XCDYouTubeVideoPlayerViewControllerDidReceiveVideoNotification object:nil];
     
     [[PlayerEventLogger sharedLogger] setEnabled:YES];

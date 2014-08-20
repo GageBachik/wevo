@@ -57,7 +57,7 @@ class Home: UIViewController, UITextFieldDelegate {
     
     @IBAction func didSignIn(sender: AnyObject) {
 
-        Alamofire.request(.POST, "http://107.170.6.117:49156/auth", parameters: ["username": usernameTextField.text, "password": passwordTextField.text])
+        Alamofire.request(.POST, "http://107.170.6.117:49157/auth", parameters: ["username": usernameTextField.text, "password": passwordTextField.text])
             .responseJSON {(request, response, JSON, error) in
                 println(error)
                 println(JSON)
@@ -79,7 +79,7 @@ class Home: UIViewController, UITextFieldDelegate {
     
     @IBAction func didSignUp(sender: AnyObject) {
         
-        Alamofire.request(.POST, "http://107.170.6.117:49156/auth", parameters: ["username": usernameTextField.text, "password": passwordTextField.text])
+        Alamofire.request(.POST, "http://107.170.6.117:49157/auth", parameters: ["username": usernameTextField.text, "password": passwordTextField.text])
             .responseJSON {(request, response, JSON, error) in
                 println(error)
                 println(JSON)
@@ -102,6 +102,7 @@ class Home: UIViewController, UITextFieldDelegate {
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
             return UIStatusBarStyle.LightContent;
     }
+    
 
     /*
     // MARK: - Navigation

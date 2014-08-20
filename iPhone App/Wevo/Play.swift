@@ -17,7 +17,7 @@ import Foundation
         var postData = ["artists": artists];
         println("the post data is: \(postData)");
         println("the userId is: \(userId)");
-        var postUrl = "http://107.170.6.117:49156/music/" + userId
+        var postUrl = "http://107.170.6.117:49157/music/" + userId
         Alamofire.request(.POST, postUrl, parameters: postData)
             .responseJSON {(request, response, JSON, error) in
                 println("Error: \(error)")
