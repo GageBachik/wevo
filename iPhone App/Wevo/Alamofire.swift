@@ -23,7 +23,7 @@
 import Foundation
 
 public struct Alamofire {
-
+    
     // HTTP Method Definitions; see http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
     public enum Method: String {
         case OPTIONS = "OPTIONS"
@@ -36,20 +36,20 @@ public struct Alamofire {
         case TRACE = "TRACE"
         case CONNECT = "CONNECT"
     }
-
+    
     public enum ParameterEncoding {
         case URL
         case JSON(options: NSJSONWritingOptions)
         case PropertyList(format: NSPropertyListFormat, options: NSPropertyListWriteOptions)
-
+        
         func encode(request: NSURLRequest, parameters: [String: AnyObject]?) -> (NSURLRequest, NSError?) {
             if parameters == nil {
                 return (request, nil)
             }
-
+            
             var mutableRequest: NSMutableURLRequest! = request.mutableCopy() as NSMutableURLRequest
             var error: NSError? = nil
-
+            
             switch self {
             case .URL:
                 func query(parameters: [String: AnyObject]) -> String! {
@@ -59,19 +59,19 @@ public struct Alamofire {
                             for (nestedKey, value) in dictionary {
                                 components += queryComponents("\(key)[\(nestedKey)]", value)
                             }
-
+                            
                             return components
                         }
-
+                        
                         func arrayQueryComponents(key: String, array: [AnyObject]) -> [(String, String)] {
                             var components: [(String, String)] = []
                             for value in array {
                                 components += queryComponents("\(key)[]", value)
                             }
-
+                            
                             return components
                         }
-
+                        
                         var components: [(String, String)] = []
                         if let dictionary = value as? [String: AnyObject] {
                             components += dictionaryQueryComponents(key, dictionary)
@@ -80,19 +80,19 @@ public struct Alamofire {
                         } else {
                             components.append(key, "\(value)")
                         }
-
+                        
                         return components
                     }
-
+                    
                     var components: [(String, String)] = []
                     for key in sorted(Array(parameters.keys), <) {
                         let value: AnyObject! = parameters[key]
                         components += queryComponents(key, value)
                     }
-
+                    
                     return join("&", components.map{"\($0)=\($1)"} as [String])
                 }
-
+                
                 func encodesParametersInURL(method: Method) -> Bool {
                     switch method {
                     case .GET, .HEAD, .DELETE:
@@ -101,7 +101,7 @@ public struct Alamofire {
                         return false
                     }
                 }
-
+                
                 if encodesParametersInURL(Method.fromRaw(request.HTTPMethod)!) {
                     let URLComponents = NSURLComponents(URL: mutableRequest.URL, resolvingAgainstBaseURL: false)
                     URLComponents.query = (URLComponents.query ? URLComponents.query + "&" : "") + query(parameters!)
@@ -110,13 +110,13 @@ public struct Alamofire {
                     if !mutableRequest.valueForHTTPHeaderField("Content-Type") {
                         mutableRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
                     }
-
+                    
                     mutableRequest.HTTPBody = query(parameters!).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
                 }
-
+                
             case .JSON(let options):
                 let data = NSJSONSerialization.dataWithJSONObject(parameters, options: options, error: &error)
-
+                
                 if data {
                     let charset = CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding))
                     mutableRequest.setValue("application/json; charset=\(charset)", forHTTPHeaderField: "Content-Type")
@@ -124,33 +124,33 @@ public struct Alamofire {
                 }
             case .PropertyList(let (format, options)):
                 let data = NSPropertyListSerialization.dataWithPropertyList(parameters, format: format, options: options, error: &error)
-
+                
                 if data {
                     let charset = CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));
                     mutableRequest.setValue("application/x-plist; charset=\(charset)", forHTTPHeaderField: "Content-Type")
                     mutableRequest.HTTPBody = data
                 }
             }
-
+            
             return (mutableRequest, error)
         }
     }
-
+    
     // MARK: -
-
+    
     class Manager {
         class var sharedInstance: Manager {
-            struct Singleton {
-                static let instance = Manager()
+        struct Singleton {
+            static let instance = Manager()
             }
-
+            
             return Singleton.instance
         }
-
+        
         let delegate: SessionDelegate
         let session: NSURLSession!
         let operationQueue: NSOperationQueue = NSOperationQueue()
-
+        
         var automaticallyStartsRequests: Bool = true
 
         lazy var defaultHeaders: [String: String] = {
@@ -174,12 +174,12 @@ public struct Alamofire {
             // User-Agent Header; see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.43
             let userAgent: String = {
                 if let info = NSBundle.mainBundle().infoDictionary {
-                    let executable: AnyObject? = info[kCFBundleExecutableKey]
-                    let bundle: AnyObject? = info[kCFBundleIdentifierKey]
-                    let version: AnyObject? = info[kCFBundleVersionKey]
-                    let os: AnyObject? = NSProcessInfo.processInfo()?.operatingSystemVersionString
+                    let executable: AnyObject = info[kCFBundleExecutableKey] ?? "Unknown"
+                    let bundle: AnyObject = info[kCFBundleIdentifierKey] ?? "Unknown"
+                    let version: AnyObject = info[kCFBundleVersionKey] ?? "Unknown"
+                    let os: AnyObject = NSProcessInfo.processInfo()?.operatingSystemVersionString ?? "Unknown"
 
-                    var mutableUserAgent = NSMutableString(string: "\(executable!)/\(bundle!) (\(version!); OS \(os!))") as CFMutableString
+                    var mutableUserAgent = NSMutableString(string: "\(executable)/\(bundle) (\(version); OS \(os))") as CFMutableString
                     let transform = NSString(string: "Any-Latin; Latin-ASCII; [:^ASCII:] Remove") as CFString
                     if CFStringTransform(mutableUserAgent, nil, transform, 0) == 1 {
                         return mutableUserAgent as NSString

@@ -10,7 +10,7 @@ import UIKit
 
 var firstPlay: Bool = true;
 var videoIds: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("videoIds")
-var count: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("count");
+var count: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("count")
 var currentIndex = 0;
 var currentImage = 0;
 var playImage = UIImage(named: "Play.png")
@@ -142,7 +142,7 @@ class Playlist: UIViewController {
             currentIndex = 0
             println("hit 11 currint index:\(currentIndex)")
             var postData = ["userId": token];
-            var postUrl = "http://107.170.6.117:49157/user/getNextTen"
+            var postUrl = "http://107.170.6.117:49158/user/getNextTen"
             Alamofire.request(.POST, postUrl, parameters: postData)
                 .responseJSON {(request, response, JSON, error) in
                     println("Error: \(error)")
@@ -183,7 +183,7 @@ class Playlist: UIViewController {
     //Notification recieved
     
     func videoPlayerViewControllerDidReceiveVideo(notification: NSNotification){
-        videoString = notification.userInfo.description as NSString
+        videoString = notification.userInfo!.description as NSString
         fixedString = videoString.substringFromIndex(22) as String
         finalTitle = fixedString.stringByReplacingOccurrencesOfString("]", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
         videoTitle.text = finalTitle
@@ -207,7 +207,7 @@ class Playlist: UIViewController {
         var state = moviePlayerController.loadState as MPMovieLoadState
         if (state & MPMovieLoadState.PlaythroughOK){
             println("Video Playable!")
-            dispatch_after(1, dispatch_get_main_queue(), {videoPlayerViewController.moviePlayer.play()})
+            dispatch_after(2, dispatch_get_main_queue(), {videoPlayerViewController.moviePlayer.play()})
         }
     }
     
